@@ -18,6 +18,8 @@
     <input id="change_contract" type="text">
     <button onclick="changecontract()">주소 바꾸기</button>
     <button onclick="contractHistory()">컨트랙트 히스토리</button>
+    <div>**호출 테스트 로그보는 곳**</div>
+    <div id="contractHistory"></div>
 </li>
 
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
@@ -133,8 +135,55 @@ function changecontract() {
 
 function contractHistory() {
 
-    console.log("안녕");
-   // web3.eth.getTransaction()
+ var block;
+	var historycnt = 0;
+	var historyList = "";
+
+	var lastBlockNumber;
+
+	document.getElementById("contractHistory").innerHTML = "컨트랙트 히스토리 불러오는중...<hr />";
+
+	var filter = web3.eth.filter({fromBlock:0, toBlock:'latest', address:contractAddress});
+	filter.get(function(e, r)
+	{
+		if(!e)
+		{
+			console.log("r.length : " + (r.length) + "\n");
+			if (r.length > 0)
+			{
+
+				for (i=r.length-1; i>0; i--)
+				{
+					if (lastBlockNumber != r[i].blockNumber)
+					{
+						historycnt++;
+						lastBlockNumber = r[i].blockNumber;
+						console.log(r[i]);
+						historyList += historycnt + ".  BlockNumber : <a href='https://testnet.etherscan.io/block/" + r[i].blockNumber + "' target='_blank'>" + r[i].blockNumber + "</a>"
+									+ " / TransactionHash : " + r[i].transactionHash
+									+ " / TransactionLogIndex : " + r[i].transactionLogIndex
+									+ " / BlockHash : " + r[i].blockHash + "<Br /><Br />";
+
+						if (historycnt >= 10)
+						{
+							break;
+						}
+					}
+				}
+
+			}
+			else
+			{
+				historyList = "트랜잭션 로그가 없습니다.";
+			}
+			document.getElementById("contractHistory").innerHTML = historyList + "<Hr />";
+
+		}
+		else
+		{
+			console.log('Error: '+e);
+		}
+	});
 }
 
 </script>
