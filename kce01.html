@@ -107,10 +107,14 @@ function setValue() {
 }
 
 function setContract() {
-    
+
     var newAddr = prompt("컨트랙트 주소를 입력하세요.");
-	if (newAddr)
-	{
+	if (newAddr == "")
+    {
+        alert("컨트랙트 주소를 입력하지 않았습니다!!");
+    }
+	else
+    {
 		contractAddress = newAddr;
 		startApp();
 	}
