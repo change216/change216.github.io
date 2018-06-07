@@ -143,8 +143,8 @@ function contractHistory() {
 
 	document.getElementById("contractHistory").innerHTML = "컨트랙트 히스토리 불러오는중...<hr />";
 
-	var filter = web3.eth.filter({fromBlock:0, toBlock:'latest', address:contractAddress});
-	filter.get(function(e, r)
+	var filter = web3.eth.filter('latest');
+	filter.watch(function(e, r)
 	{
 		if(!e)
 		{
