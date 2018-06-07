@@ -15,7 +15,10 @@
 <h3>Simple Storage dApp 예제</h3>
 <ul>
   <li>컨트랙트 주소!!: <span id="contractAddr"></span>
-    <button onclick="setContract()">주소 바꾸기</button></li>
+    <input id="change_contract" type="text">
+    <button onclick="changecontract()">주소 바꾸기</button>
+    <button onclick="contractHistory()">컨트랙트 히스토리</button>
+</li>
 
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
   <li>컨트랙트에 저장된 값: <span id="storedData"></span>
@@ -118,6 +121,21 @@ function setContract() {
 		contractAddress = newAddr;
 		startApp();
 	}
+}
+
+function changecontract() {
+    
+    var changecontract = document.getElementById('change_contract').value;
+
+
+    contractAddress = changecontract;
+    startApp();
+}
+
+
+function contractHistory() {
+    getlink(contractAddress);
+    web3.eth.getTransaction()
 }
 
 </script>
