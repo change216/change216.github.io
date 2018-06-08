@@ -1,0 +1,67 @@
+<html>
+<head>
+ <title>Hello World DApp</title>
+ <link href='https://fonts.googleapis.com/css?family=Open Sans:400,700' rel='stylesheet' type='text/css'>
+ <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="container">
+ <h1>A Simple Hello World Voting Application</h1>
+ <div class="table-responsive">
+  <table class="table table-bordered">
+   <thead>
+    <tr>
+     <th>Candidate</th>
+     <th>Votes</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <td>창은</td>
+     <td id="candidate-1"></td>
+    </tr>
+    <tr>
+     <td>김창은</td>
+     <td id="candidate-2"></td>
+    </tr>
+    <tr>
+     <td>창으니</td>
+     <td id="candidate-3"></td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+ <input type="text" id="candidate" />
+ <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a>
+</body>
+<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="./index.js"></script>
+
+
+<script>
+var contractAddress = '0xb84c1f756ec3768100752976e6fd7a74f1596cd2';
+var abi = [{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"temp","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
+var votingStorageContract; // 똑같은 컨트랙트가 여러개주소에 동시에 존재 할 수 있음. 클래스 형태.
+var voiingStorage; // 클래스에 구체적인 컨트랙트 주소=인스턴스 넣어주기
+
+function voteForCandidate(candidate) {
+ candidateName = $("#candidate").val();
+ try {
+  contractInstance.voteForCandidate(candidateName, {from: web3.eth.accounts[0]}, function() {
+   let div_id = candidates[candidateName];
+   $("#"+div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());
+  });
+ } catch (err) {
+ }
+}
+
+$(document).ready(function() {
+ candidateNames = Object.keys(candidates);
+ for (var i = 0; i < candidateNames.length; i++) {
+  let name = candidateNames[i];
+  let val = contractInstance.totalVotesFor.call(name).toString()
+  $("#"+candidates[name]).html(val);
+ }
+});
+</script>
+</html>
