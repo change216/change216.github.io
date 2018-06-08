@@ -42,7 +42,48 @@
 var contractAddress = '0xb84c1f756ec3768100752976e6fd7a74f1596cd2';
 var abi = [{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"temp","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
 var votingStorageContract; // 똑같은 컨트랙트가 여러개주소에 동시에 존재 할 수 있음. 클래스 형태.
-var voiingStorage; // 클래스에 구체적인 컨트랙트 주소=인스턴스 넣어주기
+var votingStorage; // 클래스에 구체적인 컨트랙트 주소=인스턴스 넣어주기
+
+window.addEventListener('load', function() {
+
+// Checking if Web3 has been injected by the browser (Mist/MetaMask)
+if (typeof web3 !== 'undefined') {
+  // Use Mist/MetaMask's provider
+  window.web3 = new Web3(web3.currentProvider);
+} else {
+  console.log('No web3? You should consider trying MetaMask!')
+  // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+  window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+}
+// Now you can start your app & access web3 freely:
+startApp();
+});
+
+function startApp() {
+    votingStorageContract = web3.eth.contract(abi);
+    votingStorage = votingStorageContract.at(contractAddress);
+  document.getElementById('candidate').innerHTML = getLink(contractAddress);
+  web3.eth.getAccounts(function(e,r){
+    document.getElementById('accountAddr').innerHTML = getLink(r[0]);
+  });
+
+  getValue();
+}
+
+
+///해결방법
+/*
+
+이름 string => bytes32 매핑해서 저장한다.
+ui에서 받아올때도 string=>.. 한 상태의 이름을 컨트랙트에 보내서 함수 적용시킨다.
+
+처음 컨트랙트 생성시에도
+string 받은걸 바꿔준다.
+*/
+
+
+
+
 
 function voteForCandidate(candidate) {
  candidateName = $("#candidate").val();
