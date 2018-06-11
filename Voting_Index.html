@@ -32,6 +32,7 @@
  </div>
  <input type="text" id="candidate" />
  <a href="#" onclick="voteForCandidate()" class="btn btn-primary">Vote</a>
+ <li><div id="result"></div></li>
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
@@ -39,7 +40,7 @@
 
 
 <script>
-var contractAddress = '0xb84c1f756ec3768100752976e6fd7a74f1596cd2';
+var contractAddress = '0x5c185743bdea3e98b3da12d911ce546c747aedc8';
 var abi = [{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"totalVotesFor","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"validCandidate","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"temp","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"votesReceived","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"candidateList","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"candidate","type":"bytes32"}],"name":"voteForCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"candidateNames","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
 var votingStorageContract; // 똑같은 컨트랙트가 여러개주소에 동시에 존재 할 수 있음. 클래스 형태.
 var votingStorage; // 클래스에 구체적인 컨트랙트 주소=인스턴스 넣어주기
@@ -81,16 +82,22 @@ ui에서 받아올때도 string=>.. 한 상태의 이름을 컨트랙트에 보�
 string 받은걸 바꿔준다.
 */
 
+function voteForCandidate(candidate) {
+ // StringToBytes
+ var byteCandidate = candidate.val();
+  votingStorage.voteForCandidate(byteCandidate, function(e,r){
+    console.log(r);
+    document.getElementById('result').innerHTML = r;})
+}
 
 
-
-
+/*
 function voteForCandidate(candidate) {
  candidateName = $("#candidate").val();
  try {
-  contractInstance.voteForCandidate(candidateName, {from: web3.eth.accounts[0]}, function() {
+  votingStorage.voteForCandidate(candidateName, {from: web3.eth.accounts[0]}, function() {
    let div_id = candidates[candidateName];
-   $("#"+div_id).html(contractInstance.totalVotesFor.call(candidateName).toString());
+   $("#"+div_id).html(votingStorage.totalVotesFor.call(candidateName).toString());
   });
  } catch (err) {
  }
@@ -100,9 +107,11 @@ $(document).ready(function() {
  candidateNames = Object.keys(candidates);
  for (var i = 0; i < candidateNames.length; i++) {
   let name = candidateNames[i];
-  let val = contractInstance.totalVotesFor.call(name).toString()
+  let val = votingStorage.totalVotesFor.call(name).toString()
   $("#"+candidates[name]).html(val);
  }
 });
+*/
+
 </script>
 </html>
