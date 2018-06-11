@@ -20,15 +20,15 @@
 
         function showList() {
             var table = document.getElementById("table1");
-            var length = vc.getNumOfCandidates();
+            var length = vc.getNumOfCandidates(function(e,r){});
             for(var i = 0 ; i< length; i++)
             {
-                var candidate = vc.getCandidateString(i);
+                var candidate = vc.getCandidateString(i, function(e,r){candidate = r});
                 var row = table.insertRow();
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
                 cell1.innerHTML = candidate;
-                cell2.innerHTML = vc.getScore(candidate);
+                vc.getScore(candidate,function(e,r){cell2.innerHTML =r;});
             }
 
         }
@@ -69,7 +69,7 @@
     <body>
         <hl>블록체인 투표</hl>
             <div>
-                내 계정: <span id="account"></span>
+                내 계정: <input type = "text" id="account" value="0xc5983e664353679b9b7178c6977128444fcd7d9e">
                 패스워드: <input type = "password" id="pass" value="1234">
             </div><br>
 
