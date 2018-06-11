@@ -19,7 +19,7 @@
 
 
         function showList() {
-            var table = document.getElementById("table1");
+            var table = document.getElementById('table1');
             var length = vc.getNumOfCandidates(function(e,r){});
             for(var i = 0 ; i< length; i++)
             {
@@ -76,7 +76,6 @@
             <div><input type = "text" id = "candidate" value="창은">
                 <button onClick="vote()">투표하기</button>
                 <button onClick="addCand()">후보 추가하기</button>
-                <button onClick="getScore()">개표</button>
             </div>
             <table id="table1"/>
             <script>
