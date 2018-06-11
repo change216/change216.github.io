@@ -12,12 +12,71 @@
         var contractAddress = '0x22231c967eb25ed04cb38a95c7cbf51a6167d6ea';
         var abi =[{"constant":true,"inputs":[{"name":"cand","type":"string"}],"name":"getScore","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"alreadyVoted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"killContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"number","type":"uint8"}],"name":"getCandidateString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"addCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getNumOfCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
         var vc = web3.eth.contract(abi).at(contractAddress);
-        
+        web3.eth.getAccounts(function(e,r){
+    document.getElementById('accountAddr').innerHTML = r[0];
+  });
+
+
         function showList() {
             var table = document.getElementById("table1");
-            var length = "";
+            var length = vc.getNumOfCandidates();
+            for(var i = 0 ; i< length; i++)
+            {
+                var candidate = vc.getCandidateString(i);
+                var row = table.insertRow();
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = candidate;
+                cell2.innerHTML = vc.getScore(candidate);
+            }
 
+        }
+
+        function vote() {
+            var candidate = document.getElementById("candidate").value;
+            var account = document.getElementById("account").value;
+            web3.eth.defaultAccount = account;
+
+            if(web3.personal.unlockAccount(account, document.getElementById('pass').value)) {
+                var alreadyVoted = vc.alreadyVoted();
+                console.log(alreadyVoted);
+
+                if(alreadyVoted)
+                    alert("이미 투표하셨습니다.");
+                else
+                    vc.vote(candidate, function(e,r){if(!e) alert("트랜잭션이 성공적으로 전송되었습니다.\n"+r)});
+            }
+
+            function addCand() {
+                var candidate = document.getElementById("candidate").value;
+                var account = document.getElementById("account").value;
+
+                if(web3.personal.unlockAccount(account, document.getElementById('pass').value)) {
+                    vc.addCandidate(candidate, {from:account, gas:200000}, function(e,r){
+                        if(!e) alert("트랜잭션이 성공적으로 전송되었습니다.\n"+r)
+                    });
+                }
+            }
         }
         </script>
     </head>
+
+    <body>
+        <hl>블록체인 투표</hl>
+            <div>
+                계정: <input type="text" id="account"
+                value="">
+                패스워듸 <input type = "passwore" id="pass" value="1234">
+            </div><br>
+
+            <div><input type = "text" id = "candidate" value="창은">
+                <button onClick="vote()">투표하기</button>
+                <button onClick="addCand()">후보 추가하기</button>
+            </div>
+            <table id="table"/>
+            <script>
+                showList();
+            </script>
+
+    </body>
 </html>
