@@ -13,7 +13,7 @@
         var abi =[{"constant":true,"inputs":[{"name":"cand","type":"string"}],"name":"getScore","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"alreadyVoted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"killContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"number","type":"uint8"}],"name":"getCandidateString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"addCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getNumOfCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
         var vc = web3.eth.contract(abi).at(contractAddress);
         web3.eth.getAccounts(function(e,r){
-    document.getElementById('accountAddr').innerHTML = r[0];
+    document.getElementById('account').innerHTML = r[0];
   });
 
 
@@ -57,6 +57,10 @@
                     });
                 }
             }
+
+            /*function getScore() {
+                vc.getScore(funcion(e,r){})
+            }*/
         }
         </script>
     </head>
@@ -64,14 +68,14 @@
     <body>
         <hl>블록체인 투표</hl>
             <div>
-                계정: <input type="text" id="account"
-                value="">
+                계정: <input type="text" id="account">
                 패스워듸 <input type = "passwore" id="pass" value="1234">
             </div><br>
 
             <div><input type = "text" id = "candidate" value="창은">
                 <button onClick="vote()">투표하기</button>
                 <button onClick="addCand()">후보 추가하기</button>
+                <button onClick="getScore()">개표</button>
             </div>
             <table id="table"/>
             <script>
