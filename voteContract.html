@@ -70,7 +70,8 @@
     <body>
         <hl>블록체인 투표</hl>
             <div>
-                계정: <input type="text" id="account" value = accountId >
+                계정: <input type="text" id="account" value =  web3.eth.getAccounts(function(e,r){
+                    document.getElementById('account').innerHTML = r[0];}); >
                 패스워드: <input type = "password" id="pass" value="1234">
             </div><br>
 
