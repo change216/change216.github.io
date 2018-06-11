@@ -3,65 +3,85 @@
     <head>
             <meta charset="UTF-8">
             <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.3/milligram.min.css">
             <title>투표 예제 </title>
         <script type="text/javascript" src="./lib/bignumber.min.js"></script>
+        <script type="text/javascript" src="./lib/web3-light.js"></script>
         <script type="text/javascript" src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
     </head>
 
     <body>
             <hl>블록체인 투표</hl>
+                
+            <div>
+                계정: <span type = "text" id="account"/>
+            </div>
                 <div>
-                    계정: <input type = "text" id="account" value= "0xc5983e664353679b9b7178c6977128444fcd7d9e">
                     패스워드: <input type = "password" id="pass" value="ckddms2!">
                 </div><br>
     
-                <div><input type = "text" id = "candidate" value="창은">
+                <div>
+                    <input type = "text" id = "candidate" value="창은이">
                     <button onClick="vote()">투표하기</button>
                     <button onClick="addCand()">후보 추가하기</button>
+                    <button onClick="showList()">show</button>
                 </div>
                 <table id="table1"/>
                 <script>
-                    showList();
+                   web3.eth.getAccounts(function(e,r){
+                    document.getElementById("account").innerHTML = r[0];
+                    console.log(r[0]);});
+                    //showList();
                 </script>
-        </body>
-        <script type="text/javascript">
+    </body>
+    
+    
+    
+    <script type="text/javascript">
 
-        var Web3 = require('web3');
-        var web3 = new Web3();
-        web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
+        //var Web3 = require('web3');
+        //var web3 = new Web3();
+        //web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
+        //window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8080"));
+        //window.web3 = new Web3(web3.currentProvider);
+        //web3.eth.defaultAccount = web3.eth.accounts[0]
+        //web3.personal.unlockAccount(web3.eth.defaultAccount)
         var contractAddress = '0x22231c967eb25ed04cb38a95c7cbf51a6167d6ea';
         var abi =[{"constant":true,"inputs":[{"name":"cand","type":"string"}],"name":"getScore","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"alreadyVoted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"killContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"number","type":"uint8"}],"name":"getCandidateString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"addCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getNumOfCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
-        var vc = web3.eth.contract(abi).at(contractAddress);
+        var vc; //= web3.eth.contract(abi).at(contractAddress);
+        //web3.eth.defaultAccount = web3.eth.accounts[0];
 
-        /*
-        window.addEventListener('load', function() {
+        
+        
+        window.addEventListener('load', function () {
+         // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+         if (typeof web3 !== 'undefined') {
+            // Use Mist/MetaMask's provider
+            window.web3 = new Web3(web3.currentProvider);
+            
+            console.log('connect current');
+         } else {
+            console.log('No web3? You should consider trying MetaMask!')
+            // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+            window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+         }
+         // Now you can start your app & access web3 freely:
+         startApp();
+      });
 
-        // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-        if (typeof web3 !== 'undefined') {
-        // Use Mist/MetaMask's provider
-        window.web3 = new Web3(web3.currentProvider);
-        } else {
-        console.log('No web3? You should consider trying MetaMask!')
-        // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-        window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8080"));
-        }
-        // Now you can start your app & access web3 freely:
-        startApp();
-        });
 
         function startApp() {
-            var vc = web3.eth.contract(abi).at(contractAddress);
-            web3.eth.getAccounts(function(e,r){
-            document.getElementById("account").value = r[0];
-            console.log(r[0]);});
-        }*/
+            //web3.eth.defaultAccount = web3.eth.accounts[0];
+            //web3.personal.unlockAccount(web3.eth.defaultAccount);
+            vc = web3.eth.contract(abi).at(contractAddress);
+        }
+
         
-
-
         function showList() {
             var table = document.getElementById('table1');
-            var length = vc.getNumOfCandidates();
+            var length;
+            vc.getNumOfCandidates(function(e,r){ length = r});
+            console.log(length+"ddd");
+
             for(var i = 0 ; i< length; i++)
             {
                 var candidate; 
@@ -80,7 +100,7 @@
             var account = document.getElementById("account").value;
             web3.eth.defaultAccount = account;
 
-            if(web3.personal.unlockAccount(account, document.getElementById('pass').value)) {
+            //if(web3.personal.unlockAccount(account, document.getElementById('pass').value)) {
                 var alreadyVoted = vc.alreadyVoted();
                 console.log(alreadyVoted);
 
@@ -88,21 +108,26 @@
                     alert("이미 투표하셨습니다.");
                 else
                     vc.vote(candidate, function(e,r){if(!e) alert("트랜잭션이 성공적으로 전송되었습니다.\n"+r)});
-            }
-
-            function addCand() {
-                var candidate = document.getElementById("candidate").value;
-                var account = document.getElementById("account").value;
-
-                if(web3.personal.unlockAccount(account, document.getElementById('pass').value)) {
-                    vc.addCandidate(candidate, {from:account, gas:200000}, function(e,r){
-                        if(!e) alert("트랜잭션이 성공적으로 전송되었습니다.\n"+r)
-                    });
-                }
-            }
+            //}
         }
-        </script>
-    
 
+        function addCand() {
+                
+                var candidate = document.getElementById("candidate").value;
+                var account ;//= document.getElementById("account").in
+                web3.eth.getAccounts(function(e,r){ account =r;});
+                   
 
+                //if(web3.personal.unlockAccount(account, document.getElementById('pass').value)) {
+                   vc.addCandidate(candidate,/*  {from:account, gas:200000}, */ function(e,r){
+                       if(!e) alert("트랜잭션이 성공적으로 전송되었습니다.\n"+r);
+                       else alert("에러"+e);
+                   });
+               // }
+
+               //alert("test");
+        }  
+
+        
+    </script>
 </html>

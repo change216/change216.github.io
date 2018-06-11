@@ -18,6 +18,7 @@
     <input id="change_contract" type="text">
     <button onclick="changecontract()">주소 바꾸기</button>
     <button onclick="contractHistory()">컨트랙트 히스토리</button>
+    
     <div>**호출 테스트 로그보는 곳**</div>
     <div id="contractHistory"></div>
 </li>
@@ -41,8 +42,11 @@ HTML 소스<br>
 </p>
 
 </body>
+
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
+
+
 <script>
 var contractAddress = '0x9ff7578be9179b3efe19cf29b7d66329676e6a3c';
 var abi = [{"constant":false,"inputs":[{"name":"x","type":"uint256"}],"name":"set","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"}];
