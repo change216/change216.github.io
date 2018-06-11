@@ -15,6 +15,7 @@
         var accountId;
         web3.eth.getAccounts(function(e,r){
             accountId = r[0];
+            console.log(r[0]);
         });
 
 
@@ -70,7 +71,7 @@
         <hl>블록체인 투표</hl>
             <div>
                 계정: <input type="text" id="account" value = accountId >
-                패스워드: <input type = "passwore" id="pass" value="1234">
+                패스워드: <input type = "password" id="pass" value="1234">
             </div><br>
 
             <div><input type = "text" id = "candidate" value="창은">
