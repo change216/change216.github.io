@@ -3,6 +3,7 @@
     <head>
             <meta charset="UTF-8">
             <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.3/milligram.min.css">
             <title>투표 예제 </title>
         <script type="text/javascript" src="./lib/bignumber.min.js"></script>
         <script type="text/javascript" src="./lib/web3-light.js"></script>
@@ -16,15 +17,21 @@
                 계정: <span type = "text" id="account"/>
             </div>
                 <div>
-                    패스워드: <input type = "password" id="pass" value="ckddms2!">
+                    패스워드: <input type = "password" id="pass" value="1234">
                 </div><br>
     
                 <div>
-                    <input type = "text" id = "candidate" value="창은이">
+                    <input type = "text" id = "candidate" value="김창은2" style = 'color:olive'/>
                     <button onClick="vote()">투표하기</button>
                     <button onClick="addCand()">후보 추가하기</button>
-                    <button onClick="showList()">show</button>
+                    <button onClick="delCand()">후보 삭제하기</button>
+                    
                 </div>
+                <ui>
+                    <li>현재 후보자 수: <span id="length"></span>
+                    </li>
+                    <button onClick="showList()">show</button>
+                </ui>      
                 <table id="table1"/>
                 <script>
                    web3.eth.getAccounts(function(e,r){
@@ -45,11 +52,11 @@
         //window.web3 = new Web3(web3.currentProvider);
         //web3.eth.defaultAccount = web3.eth.accounts[0]
         //web3.personal.unlockAccount(web3.eth.defaultAccount)
-        var contractAddress = '0x22231c967eb25ed04cb38a95c7cbf51a6167d6ea';
-        var abi =[{"constant":true,"inputs":[{"name":"cand","type":"string"}],"name":"getScore","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"alreadyVoted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"killContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"number","type":"uint8"}],"name":"getCandidateString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"addCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getNumOfCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
+        var contractAddress = '0xab916b49752f57ae7543f6a29c504544c06f24b7';
+        var abi =[{"constant":true,"inputs":[{"name":"cand","type":"string"}],"name":"getScore","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"alreadyVoted","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"killContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"number","type":"uint8"}],"name":"getCandidateString","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"addCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"delCandidate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getNumOfCandidates","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"cand","type":"string"}],"name":"vote","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
         var vc; //= web3.eth.contract(abi).at(contractAddress);
         //web3.eth.defaultAccount = web3.eth.accounts[0];
-
+        
         
         
         window.addEventListener('load', function () {
@@ -76,32 +83,48 @@
         }
 
         
+
+
         function showList() {
+            
+            
             var table = document.getElementById('table1');
-            var length;
-            vc.getNumOfCandidates(function(e,r){ length = r});
-            console.log(length+"ddd");
+            
+            var Numlength = vc.getNumOfCandidates(function(e,r){ 
+                
+                
+                
+                document.getElementById('length').innerHTML = r;
+                //Numlength = document.getElementById('length').value;
+                Numlength = r.toNumber();
+                console.log(Numlength);
 
-            for(var i = 0 ; i< length; i++)
+                for(var i = 0 ; i< Numlength; i++)
             {
-                var candidate; 
-                vc.getCandidateString(i, function(e,r){candidate = r});
-                var row = table.insertRow();
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                cell1.innerHTML = candidate;
-                cell2.innerHTML = vc.getScore(candidate,function(e,r){cell2.innerHTML =r;});
+                var candidateST = vc.getCandidateString(i, function(e,r){
+                    candidateST = r.toString();
+                    //console.log(candidateST);
+                    var row = table.insertRow();
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    cell1.innerHTML = candidateST;
+                    //cell2.innerHTML = 
+                    cell2.innerHTML = vc.getScore(r,function(e,r){cell2.innerHTML =r.toString();});
+                });
+                
             }
-
+            });
         }
 
         function vote() {
             var candidate = document.getElementById("candidate").value;
-            var account = document.getElementById("account").value;
-            web3.eth.defaultAccount = account;
-
+            //var account = document.getElementById("account").value;
+            var account ;//= document.getElementById("account").in
+            web3.eth.getAccounts(function(e,r){ account =r;});
+            //web3.eth.defaultAccount = account;
+                console.log(candidate);
             //if(web3.personal.unlockAccount(account, document.getElementById('pass').value)) {
-                var alreadyVoted = vc.alreadyVoted();
+                var alreadyVoted = vc.alreadyVoted(function(e,r){ alreadyVoted = r; console.log(r)});
                 console.log(alreadyVoted);
 
                 if(alreadyVoted)
@@ -123,11 +146,18 @@
                        if(!e) alert("트랜잭션이 성공적으로 전송되었습니다.\n"+r);
                        else alert("에러"+e);
                    });
-               // }
+                //}
+        }
 
-               //alert("test");
+        function delCand() {
+            var candidate = document.getElementById("candidate").value;    
+            console.log(candidate);
+            vc.delCandidate(candidate, function(e,r){
+                if(!e) {
+                    alert("후보자 " + candidate +"가 삭제 성공되었습니다.\n" + r);
+                } else alert("에러"+e);
+            })
         }  
 
-        
     </script>
 </html>

@@ -101,6 +101,8 @@ function setValue() {
     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     txid = r;
   });
+
+  console.log(txid + "1");
   var filter = web3.eth.filter('latest');
   filter.watch(function(e, r) {
     getValue();
@@ -109,6 +111,7 @@ function setValue() {
         document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
         document.getElementById('pending').style.cssText ='color:green;';
         document.getElementById('storedData').style.cssText ='color:green; font-size:300%;';
+        console.log(txid + "2");
         filter.stopWatching();
       }
    });
