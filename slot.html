@@ -82,10 +82,91 @@
 
             message('wait...');
         }
-
-        
-
-
         </script>
+
+        <style>
+            body {
+                text-align: center;
+                background-color:black;
+            }
+
+            input, select {
+                padding: 6px 10px;
+                margin: 4px 0;
+                display: inline-block;
+                border: 1px solid #3CBC8D;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            input[type=button] {
+                border: none;
+                border-radius: 4px;
+                border: 1px solid #3CBC8D;
+                cursor: pointer
+            }
+
+            input [type=button]:hover {
+                background-color: #45a049;
+            }
+
+            p, a {
+                color: #3CBC8D;
+                font-weight: 12px;
+            }
+            .title {
+                font-size: 50px;
+                text-align: center;
+            }
+
+            #machine {
+                text-align: center;
+            }
+        </style>
     </head>
+
+    <body>
+        <p class = "title"> ETH Slots</p>
+        <p class = "login">
+            ID:
+            <input type="text" id="address"
+            value="zz">
+
+        </p>
+
+        <div id = "machine">
+            <svg width="550" height="250" viewBox="0 0 1600 500">
+                <rect x="0" y="10" width="500" heigh"500" fill="black"
+                stroke="white" stroke-width="10">
+                </rect>
+                <rect x="550" y="0" width="500" heigh"500" fill="black"
+                stroke="white" stroke-width="10">
+                </rect>
+                <rect x="1100" y="0" width="500" heigh"500" fill="black"
+                stroke="white" stroke-width="10">
+                </rect>
+
+                <text x="100" y="415" font-family="courier" font-size="500"
+                fill="#3CBC8D" id="first">0</text>
+                <text x="650" y="415" font-family="courier" font-size="500"
+                fill="#3CBC8D" id="second">0</text>
+                <text x="1200" y="415" font-family="courier" font-size="500"
+                fill="#3CBC8D" id="third">0</text>
+
+            </svg>
+        </div>
+
+        <p>
+            <select id="bet_amount">
+                <option> 0.2 </option>
+                <option> 0.4 </option>
+                <option> 0.6 </option>
+                <option> 0.8 </option>
+                <option> 1.0 </option>
+            </select>
+            <input type="button" value="Spin" onClick="spin()">
+        </p>
+        <p id="balance">0</p>
+        <p id="messages"></p>
+    </body>
 </html>
