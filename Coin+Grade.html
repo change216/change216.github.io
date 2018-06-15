@@ -9,50 +9,78 @@
         <hr color="lightcoral">
         <h3>컨트랙트 정보</h3>
         <ui>
-            <li type="square">Coin컨트랙트 : </li>
-            <li type="square">Members컨트랙트 : </li>
-            <li type="square">Owner컨트랙트 : </li>
+            <li type="square">Coin컨트랙트 : <input size="45" id="coincontract"></input> </li>
+            <li type="square">Members컨트랙트 : <input size="45" id="memcontract"></input></li>
+            <li type="square">Owner컨트랙트 : <input size="45" id="owncontract"></input></li>
         </ui>
         <hr color="lightcoral">
-        <h3>등급 테이블 설명</h3>
+        <h3>등급 테이블 설명 </h3>
         <table border="3">
                 <tr>
+                        <td>index</td>
                         <td>등급명</td>
                         <td>최소거래 횟수</td>
                         <td>최저거래 금액</td>
                         <td>캐시백 비율</td>
-                    </tr>
+                </tr>
             <tr>
+                    <td id="grade_0_index"></td>
                     <td id="grade_0_name"></td>
                     <td id="grade_0_times"></td>
                     <td id="grade_0_sum"></td>
                     <td id="grade_0_rate"></td>
             </tr>
             <tr>
+                    <td id="grade_1_index"></td>
                     <td id="grade_1_name"></td>
                     <td id="grade_1_times"></td>
                     <td id="grade_1_sum"></td>
                     <td id="grade_1_rate"></td>
             </tr>
             <tr>
+                    <td id="grade_2_index"></td>
                     <td id="grade_2_name"></td>
                     <td id="grade_2_times"></td>
                     <td id="grade_2_sum"></td>
                     <td id="grade_2_rate"></td>
             </tr>
             <tr>
+                    <td id="grade_3_index"></td>
                     <td id="grade_3_name"></td>
                     <td id="grade_3_times"></td>
                     <td id="grade_3_sum"></td>
                     <td id="grade_3_rate"></td>
             </tr>
             <tr>
+                    <td id="grade_4_index"></td>
                     <td id="grade_4_name"></td>
                     <td id="grade_4_times"></td>
                     <td id="grade_4_sum"></td>
                     <td id="grade_4_rate"></td>
             </tr>
         </table>
+        
+        <ui>
+            <h4>등급내용 추가&변경</h4>
+            <li type="square">index <input id="edit_index"></input></li>
+            <li type="square">등급명 <input id="edit_name"></input></li>
+            <li type="square">최소거래 횟수 <input id="edit_times"></input></li>
+            <li type="square">최저거래 금액 <input id="edit_sum"></input></li>
+            <li type="square">캐시백 비율 <input id="edit_rate"></input></li>
+            <button onclick="editStatus()">변경</button><button onclick="pushStatus()">추가</button>
+        </ui>
+            
+        <hr color="lightcoral">
+        <h3>내 등급 확인</h3>
+        <ui>
+            <li>내등급: <span id="mygrade"></span><button onclick="temp()">click</button></li>
+        </ui>
+        <hr color="lightcoral">
+        <h3>송금하기</h3>
+        <ui>
+
+        </ui>
+
         <hr color="lightcoral">
     </body>
     
@@ -84,24 +112,72 @@
         });
 
         function startApp() {
-            web3.eth.getAccounts(function(e,r){
-                document.getElementById('account').innerHTML = r; })
             
             CoinStorage = web3.eth.contract(abi).at(CoinAddress);
             MemStorage = web3.eth.contract(abi).at(MemAddress);
-            OwnerStorage = web3.eth.contract(abi).at(MemAddress);
+            OwnerStorage = web3.eth.contract(abi).at(OwnerAddress);
 
             for(let i =0; i<5; i++){
                 MemStorage.status(i, function(e,r){
+                document.getElementById('grade_'+ i + '_index').innerHTML= i;    
                 document.getElementById('grade_'+ i + '_name').innerHTML= r[0];
                 document.getElementById('grade_'+ i + '_times').innerHTML= r[1];
                 document.getElementById('grade_'+ i + '_sum').innerHTML= r[2];
                 document.getElementById('grade_'+ i + '_rate').innerHTML= r[3];
             })
+
+            web3.eth.getAccounts(function(e,r){
+            document.getElementById('account').innerHTML = r; })
+            document.getElementById('coincontract').value = CoinAddress;
+            document.getElementById('memcontract').value = MemAddress;
+            document.getElementById('owncontract').value = OwnerAddress;
             }
-            
            
         }
+
+        function temp(){
+            /////////////////////////////////////////////////
+            let acut = document.getElementById('account').value;
+            var mygrd;
+            MemStorage.tradingHistory('0xc5983e664353679b9b7178c6977128444fcd7d9e',function(e,r){ 
+                document.getElementById('mygrade').innerHTML = r[2].toNumber()})
+            //document.getElementById('mygrade').innerHTML = mygrd;
+            ////////////////////////////////////////////////
+        }
+
+        function editStatus() {
+            let index = document.getElementById('edit_index').value;
+            let name = document.getElementById('edit_name').value;
+            let times = document.getElementById('edit_times').value;
+            let sum = document.getElementById('edit_sum').value;
+            let rate = document.getElementById('edit_rate').value;
+            let account = document.getElementById('account').value;
+            
+            MemStorage.editStatus(index,name,times,sum,rate,function(e,r){             
+                if(!e){
+                    alert("등급변경이 되었습니다.");
+                }
+            })
+        }
+
+        function pushStatus() {
+            let name = document.getElementById('edit_name').value;
+            let times = document.getElementById('edit_times').value;
+            let sum = document.getElementById('edit_sum').value;
+            let rate = document.getElementById('edit_rate').value;
+            let account = document.getElementById('account').value;
+
+            console.log(name,times,sum,rate,account);
+
+             MemStorage.pushStatus(name,times,sum,rate,function(e,r){             
+                if(!e){
+                    alert("등급추가가 완료되었습니다.");
+                }
+            })
+        }
+
+
+
 
 
     </script>
