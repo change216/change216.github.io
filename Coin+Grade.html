@@ -1,0 +1,57 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>코인+등급 예제</title>
+    </head>
+    
+    <body>
+        <hr color="lightcoral">
+        <h3>등급 테이블 설명</h3>
+        <table border="3">
+                <tr>
+                        <td>등급명</td>
+                        <td>최소거래 횟수</td>
+                        <td>최저거래 금액</td>
+                        <td>캐시백 비율</td>
+                    </tr>
+            <tr>
+                <td id="grade_0_name"></td>
+                <td id="grade_0_times"></td>
+                <td id="grade_0_sum"></td>
+                <td id="grade_0_rate"></td>
+            </tr>
+        </table>
+    </body>
+    
+    <script>
+
+        var CoinAddress = '0x8fca80f36b786b6406ff29f7840b5e1f2cfcd5e2';
+        var MemAddress = '0x43dfb639ea412e66cfad446327199652b5497418';
+        var OwnerAddress = '0x9ca2191727b038a964479ad39d85f25e030f295b';
+        
+        var abi = [{"constant":true,"inputs":[],"name":"coin","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_member","type":"address"}],"name":"getCashbackRate","outputs":[{"name":"rate","type":"int8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"status","outputs":[{"name":"name","type":"string"},{"name":"times","type":"uint256"},{"name":"sum","type":"uint256"},{"name":"rate","type":"int8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_member","type":"address"},{"name":"_value","type":"uint256"}],"name":"updateHistory","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_addr","type":"address"}],"name":"setCoin","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"tradingHistory","outputs":[{"name":"times","type":"uint256"},{"name":"sum","type":"uint256"},{"name":"statusIndex","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_name","type":"string"},{"name":"_times","type":"uint256"},{"name":"_sum","type":"uint256"},{"name":"_rate","type":"int8"}],"name":"editStatus","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_new","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_times","type":"uint256"},{"name":"_sum","type":"uint256"},{"name":"_rate","type":"int8"}],"name":"pushStatus","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldaddr","type":"address"},{"indexed":false,"name":"newaddr","type":"address"}],"name":"TransferOwnership","type":"event"}];
+        var simpleStorageContract;
+        var simpleStorage;
+
+
+        window.addEventListener('load', function() {
+        // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+        if (typeof web3 !== 'undefined') {
+        // Use Mist/MetaMask's provider
+        window.web3 = new Web3(web3.currentProvider);
+        } else {
+        console.log('No web3? You should consider trying MetaMask!')
+        // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+        window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+        // Now you can start your app & access web3 freely:
+        startApp();
+        });
+
+        function startApp() {
+
+        }
+
+
+    </script>
+</html>
