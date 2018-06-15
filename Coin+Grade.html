@@ -78,7 +78,9 @@
         <hr color="lightcoral">
         <h3>송금하기</h3>
         <ui>
-
+            <li type="square">받는 사람 주소: <input id="transaddress" size="45"> </li>
+            <li type="square">보낼 금액:　　　<input id="transbal" > 
+                <button onclick="transfer()">보내기</button></li>
         </ui>
 
         <hr color="lightcoral">
@@ -94,6 +96,7 @@
         var CoinStorage;
         var MemStorage;
         var OwnerStorage;
+        var myaccount;
 
 
         window.addEventListener('load', function() {
@@ -127,7 +130,7 @@
             })
 
             web3.eth.getAccounts(function(e,r){
-            document.getElementById('account').innerHTML = r; })
+            document.getElementById('account').innerHTML = r; myaccount =r; })
             document.getElementById('coincontract').value = CoinAddress;
             document.getElementById('memcontract').value = MemAddress;
             document.getElementById('owncontract').value = OwnerAddress;
@@ -137,11 +140,10 @@
 
         function temp(){
             /////////////////////////////////////////////////
-            let acut = document.getElementById('account').value;
             var mygrd;
-            MemStorage.tradingHistory('0xc5983e664353679b9b7178c6977128444fcd7d9e',function(e,r){ 
-                document.getElementById('mygrade').innerHTML = r[2].toNumber()})
-            //document.getElementById('mygrade').innerHTML = mygrd;
+            MemStorage.tradingHistory(myaccount,function(e,r){ 
+                mygrd = r[2].toNumber(); 
+                document.getElementById('mygrade').innerHTML = mygrd;})
             ////////////////////////////////////////////////
         }
 
