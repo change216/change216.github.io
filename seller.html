@@ -9,17 +9,11 @@
 </head>
 
   <body>
-
       <h3> SELLER</h3>
-       <button href="http://www.naver.com"  class="css3dbutton">
-              <span class="outer">
-              <span class="top">Sign Up!</span>
-              <span class="bottom">It's free and fast</span>
-              </span>
-              </button>
-              <form>
-          
-          <li>가입: <div class="dynamiclabel"><input id="addmember" type="text">
+      <form>
+           
+          <ul>
+              <li>가입: <div class="dynamiclabel"><input id="addmember" type="text">
             <label for="addmember">이름</label></div>
             <div class="dynamiclabel"><input id="newid" type="text">
             <label for="newid">아이디</label></div></li>
@@ -55,12 +49,21 @@
               <div class="dynamiclabel">
                 <input id="pro_name" type="text">
                 <label for="pro_name">매물 이름</label>
+                </div>
               
               <button onclick="setUploadProduct()">버튼</button>
             </li>
 
-            <li>계약(서류)</li>
-            <li><div class="dynamiclabel">
+            <li>개인정보 서류등록</li>
+            <li>
+            <div class="dynamiclabel">    
+                <form action="/">
+                 <fieldset>    
+                        <input type="file" name="photo" id="photo"></div>
+                        <button type="button" onclick="upload()">Upload</button>
+                    </fieldset>
+                </form> 
+                <a id="url2"></a>
               <input id="docu_Image" type="text">
               <label for="docu_Image">계약사진</label>
             </div>
@@ -71,7 +74,12 @@
             <div class="dynamiclabel">
               <input id="docu_info" type="text">
               <label for="docu_info">계약 정보</label>
+              <button onclick="SetMyDocument()">서류 등록하기</button>
             </div></li>
+
+            
+
+            
 
 
 
@@ -100,33 +108,207 @@
               <div class="dynamiclabel">
                 <input id="pro_updatename" type="text">
                 <label for="pro_updatename">매물 이름</label>
-              
+              </div>
               <button onclick="setUpdateProduct()">수정 완료버튼</button>
             </li>
 
             <button onclick="closetrans()">거래 종료</button>
             <button onclick="Allstoptransclose()">거래 취소</button>
 
+            <li>
+            <div class="dynamiclabel">
+                <input id="trans_member" type="text">
+                <label for="trans_member">맴버 컨트랙트</label>
+              </div>
+              <div class="dynamiclabel">
+                <input id="trans_proidx" type="text">
+                <label for="trans_proidx">매물인덱스</label>
+              </div>
+              <button onclick="setTrans()">트랜스 시작버튼</button>
+            </li>
+        
+
+            <li>정보 출력
+                <div class="dynamiclabel">
+                    <input id="pro_index" type="text">
+                    <label for="pro_index">매물 인덱스</label>
+                  </div>
+                  <button onclick="getProduct()">정보 출력버튼</button>
+              <span id="returninfo"></span><br>
+              <span id="returnprice"></span><br>
+              <span id="returntag"></span><br>
+              <span id="returnname"></span><br>
+              <span id="returnimage"></span><br>
+              <span id="returnowner"></span><br>
+              <span id="returnnumber"></span>
+            </li>
+
+            <li>판매자 정보
+                <div class="dynamiclabel">
+                    <input id="seller_addr" type="text">
+                    <label for="seller_addr">판매자 주소</label>
+                  </div>
+                  <button onclick="getsellerinfo()">정보 출력버튼</button>
+                <span id="membertype"></span><br>
+                <span id="phonenumber"></span><br>
+                <span id="reliability"></span><br>
+                <span id="Status_Numberofpeople"></span><br>
+                <span id="Status_sum"></span><br>
+                <span id="Status_avg"></span><br>
+                <span id="id"></span><br>
+                <span id="name"></span>
+
+            </li>
+            <li>물품 정보
+                <span id="membertype"></span><br>
+                <span id="phonenumber"></span><br>
+                <span id="reliability"></span><br>
+                <span id="Status_Numberofpeople"></span><br>
+                <span id="Status_sum"></span><br>
+                <span id="Status_avg"></span><br>
+                <span id="id"></span><br>
+                <span id="name"></span>
+              </li>
+
+              <li>
+                거래 완료 품목
+                <div class="dynamiclabel">
+                    <input id="tran_addr" type="text">
+                    <label for="tran_addr">트랜젝션 주소</label>
+                  </div>
+                  <button onclick="getsRoomContract()">정보 출력버튼</button>
+                <span id="membertype"></span><br>
+                <span id="phonenumber"></span><br>
+                <span id="reliability"></span><br>
+                <span id="Status_Numberofpeople"></span>
+
+              </li>
 
 
 
 
 
-            <li>판매 시작 :<div class="dynamiclabel"><input id="newsale" type="text">
+
+            <li>판매 시작 :
+              <div class="dynamiclabel"><input id="newsale" type="text">
               <label for="newsale">판매 기간</label></div></li>
               <button onclick="startsale()">판매 시작</button>
             </ul>
           
-          
+           
       </form>
+      <button href="http://192.168.0.68:8080/김창은.html" class="css3dbutton">
+        <span class="outer">
+        <span class="top">Sign Up!</span>
+        <span class="bottom">It's free and fast</span>
+        </span>
+      </button>
 
 
 
   </body>
 
+
+
   <script>
-      function click() {
-       
+        var membersContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"buyerDetail","outputs":[{"name":"flag","type":"bool"},{"name":"id","type":"string"},{"name":"name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"GetMyProduct","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"address"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_id","type":"string"}],"name":"setSeller","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"myaddress","type":"address"}],"name":"setTransOwner","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"productArray","outputs":[{"name":"ProductAddress","type":"string"},{"name":"ProductInfo","type":"string"},{"name":"Price","type":"uint256"},{"name":"Tag","type":"string"},{"name":"ProductName","type":"string"},{"name":"ImageHashsrc","type":"string"},{"name":"owner","type":"address"},{"name":"Productnumber","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_trans","type":"address"}],"name":"getRoomContract","outputs":[{"name":"","type":"address"},{"name":"","type":"address"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_id","type":"string"}],"name":"setBuyer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_trans","type":"address"},{"name":"buyer","type":"address"},{"name":"seller","type":"address"},{"name":"price","type":"uint256"}],"name":"setRoomContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getSellerScore","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_ImageHashsrc","type":"string"},{"name":"_ProductAddress","type":"string"},{"name":"_ProductInfo","type":"string"},{"name":"_Price","type":"uint256"},{"name":"_Tag","type":"string"},{"name":"_ProductName","type":"string"}],"name":"SetUploadProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_applicant","type":"address"},{"name":"_span","type":"uint256"}],"name":"SetAllowMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_trans","type":"address"},{"name":"score","type":"uint256"}],"name":"SellerEvaluation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"sellerDetail","outputs":[{"name":"flag","type":"bool"},{"name":"reliability","type":"uint256"},{"name":"Status_Numberofpeople","type":"uint256"},{"name":"Status_sum","type":"uint256"},{"name":"Status_avg","type":"uint256"},{"name":"id","type":"string"},{"name":"name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"string"}],"name":"getMyAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"productname","type":"string"}],"name":"NameToPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DocumentArray","outputs":[{"name":"DocumentName","type":"string"},{"name":"DocumentImageHashsrc","type":"string"},{"name":"DocumentImageInfo","type":"string"},{"name":"Documentowner","type":"address"},{"name":"Documentnumber","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"productname","type":"string"}],"name":"NameToOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_person","type":"address"},{"name":"_index","type":"uint256"}],"name":"getBuyerDocument","outputs":[{"name":"_allowReference","type":"bool"},{"name":"_approveBlockNo","type":"uint256"},{"name":"_refLimitBlockNo","type":"uint256"},{"name":"_applicant","type":"address"},{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"name":"SetMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getDocumentList","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getType","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"}]);
+        var membersaddress = '0x0d7424212551ba452db7cbec0648383b5c638de2';
+        var members;
+        var myaccount;
+
+        window.addEventListener('load', function() {
+        // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+        if (typeof web3 !== 'undefined') {
+        // Use Mist/MetaMask's provider
+        window.web3 = new Web3(web3.currentProvider);
+        console.log('connect current');
+        } else {
+        console.log('No web3? You should consider trying MetaMask!')
+        // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+        window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+        // Now you can start your app & access web3 freely:
+        startApp();
+        });
+
+
+        function startApp() {
+
+        members = membersContract.at(membersaddress);        
+        
+            web3.eth.getAccounts(function(e,r){
+                myaccount =r[0];
+                //document.getElementById('account').innerText = r[0];
+            })            
+        }
+
+  </script>
+  
+  <script>
+
+      //매물 등록하는 함수
+      function setUploadProduct() {
+          console.log(myaccount);
+        let _ImageHashsrc = document.getElementById('pro_Image').value;
+        let _ProductAddress = document.getElementById('pro_addr').value;
+        let _ProductInfo = document.getElementById('pro_info').value;
+        let _Price = document.getElementById('pro_price').value;
+        let _Tag = document.getElementById('pro_tag').value;
+        let _ProductName = document.getElementById('pro_name').value;
+
+        members.SetUploadProduct(
+            _ImageHashsrc,_ProductAddress,_ProductInfo,_Price,_Tag,_ProductName,
+            function(e,r){ if(!e){console.log("매물 등록 성공~!~!~");alert("매물등록 성공 :" + r)}});
       }
+
+      //매물 수정하는 함수
+      function setUpdateProduct(){
+        let _ImageHashsrc = document.getElementById('pro_Image').value;
+        let _ProductAddress = document.getElementById('pro_addr').value;
+        let _ProductInfo = document.getElementById('pro_info').value;
+        let _Price = document.getElementById('pro_price').value;
+        let _Tag = document.getElementById('pro_tag').value;
+        let _ProductName = document.getElementById('pro_name').value;
+
+
+      }
+
+      //개인정보 서류 등록함수
+      function SetMyDocument() {
+        let _DocumentName = document.getElementById('docu_name').value;
+        let _DocumentImageHashsrc = document.getElementById('docu_Image').value;
+        let _DocumentImageInfo = document.getElementById('docu_info').value;
+      
+        members.SetUploadMyDocument(
+            _DocumentName,_DocumentImageHashsrc,_DocumentImageInfo,
+            function(e,r){if(!e){console.log("개인서류 등록 성공~!~!~");alert("개인서류 등록 성공 :" + r)}}); 
+      }
+
+
+  </script>
+  <script type="text/javascript">
+    function upload() {
+      const reader = new FileReader();
+      reader.onloadend = function() {
+        const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
+        const buf = ethereumjs.Buffer.Buffer(reader.result) // Convert data into buffer
+        ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
+          if(err) {
+            console.error(err)
+            return;
+          }
+          //let url = `https://ipfs.io/ipfs/${result[0].hash}`
+          let url = `http://localhost:8080/ipfs/${result[0].hash}`
+          console.log(`Url --> ${url}`)
+          document.getElementById("pro_Image").value= result[0].hash;
+          document.getElementById("docu_Image").value= result[0].hash;
+          
+          //document.getElementById("pro_Image").href= url
+          //document.getElementById("output").src = url
+        })
+      }
+      const photo = document.getElementById("photo");
+      reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
+    }
   </script>
   <html>
