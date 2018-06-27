@@ -4,14 +4,56 @@
     </head>
 
     <body>
+        <hr color="##00BFFF">
+        <h2>내 정보 : <input id="account" size="45"></input></h2>
+        <ul>
+            <li>이름: <span id="name"></span></li>
+            <li>현재 블록번호: <span id="blocknum"></span></li>
+        </ul>
+        <hr color="#00BFFF">
+        <h3>Person</h3>
+        <h4>본인 정보 등록하기</h4>
+        <ul>
+            <li>이름: <input id="set_pername"></input></li>
+            <li>나이: <input id="set_perbirth"></input> <button onclick="setPerson()">등록하기</button></li>
+        </ul>
+        <h4>내 정보 참조 허가 해주기</h4>
+        <ui>
+            <li>허가해줄 주소: <input id="approve_addr"></input></li>
+            <li>열람가능시간 : <input id="approve_time"></input> <button onclick="setApprove()">등록하기</button></li>
+        </ui>
+        
+        <hr color="#00BFFF">
+        <h3>Oragnization</h3>
+        <h4>조직 정보 등록하기</h4>
+        <ul><li>이름: <input id="set_orgname"></input> <button onclick="setOragnization()">등록하기</button></li></ul>
+        <h4>개인 소속증명하기</h4>
+        <ul><li>증명해줄 주소: <input id="setbelong"></input> <button onclick="setBelong()">등록하기</button></li> </ul>
+        <hr color="#00BFFF">
 
+        <h3>개인정보 열람하기</h3>
+        <ul>
+            <li>주소: <input id="get_addr" size="45"></input> <button onclick="getPerson()">열람하기</button></li> 
+        </ul>
+        <div>
+                <h4><열람내역></h4>
+                <div>참조 허가 여부 :<span id="allowReference"></span></div>
+                <div>승인시점 블록번호 :<span id="approveBlockNo"></span></div>
+                <div>열람종료 블록번호 :<span id="refLimitBlockNo"></span></div>
+                <div>열람 허용주소 :<span id="applicant"></span></div>
+                <div>해당 주소 이름 :<span id="get_name"></span></div>
+                <div>해당 주소 나이 :<span id="get_birth"></span></div>
+                <div>해당 주소 인증기관 목록 :<span id="get_orglist"></span></div>
+        </div>
+        
     </body>
     <script>
 
-        var ContractAddress = '0xe7d4e0b21e825ef6239838fd273b66493f8426b8';
-        
-        var abi = [{"constant":true,"inputs":[{"name":"_person","type":"address"}],"name":"getPerson","outputs":[{"name":"_allowReference","type":"bool"},{"name":"_approveBlockNo","type":"uint256"},{"name":"_refLimitBlockNo","type":"uint256"},{"name":"_applicant","type":"address"},{"name":"_name","type":"string"},{"name":"_birth","type":"string"},{"name":"_orglist","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_birth","type":"string"}],"name":"setPerson","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_person","type":"address"}],"name":"setBelong","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"}],"name":"setMyaddress","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOrgName","outputs":[{"name":"_name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getPersonName","outputs":[{"name":"_name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_applicant","type":"address"},{"name":"_span","type":"uint256"}],"name":"setApprove","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"string"}],"name":"getMyAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"}],"name":"setOragnization","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"orgDetail","outputs":[{"name":"name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
+        var ContractAddress = '0x376533eaa54fe13e2837553757be88ba48111986';
+        var abi = [{"constant":true,"inputs":[],"name":"getType","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_person","type":"address"}],"name":"getPerson","outputs":[{"name":"_allowReference","type":"bool"},{"name":"_approveBlockNo","type":"uint256"},{"name":"_refLimitBlockNo","type":"uint256"},{"name":"_applicant","type":"address"},{"name":"_name","type":"string"},{"name":"_birth","type":"string"},{"name":"_orglist","type":"address[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_birth","type":"string"}],"name":"setPerson","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_person","type":"address"}],"name":"setBelong","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"}],"name":"setMyaddress","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOrgName","outputs":[{"name":"_name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getPersonName","outputs":[{"name":"_name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_applicant","type":"address"},{"name":"_span","type":"uint256"}],"name":"setApprove","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"string"}],"name":"getMyAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"}],"name":"setOragnization","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"orgDetail","outputs":[{"name":"setting","type":"bool"},{"name":"name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"}];
         var ContractStorage;
+        var type; //해당 주소가 인물인지 인증기관인지?
+        var myaccount; //지금 접속한 노드 주소
 
         window.addEventListener('load', function() {
         // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -32,6 +74,103 @@
             
             ContractStorage = web3.eth.contract(abi).at(ContractAddress);
             
+            web3.eth.getAccounts(function(e,r){
+                myaccount =r;
+                document.getElementById('account').value = r;
+            })
+            web3.eth.getBlockNumber(function(e,r){
+                document.getElementById('blocknum').innerHTML=r;
+                console.log(r);
+            })
+
+            typeAndName();
+            
+
         }
+
+        function typeAndName(){
+            ContractStorage.getType(function(e,r){
+               
+               type =r;
+               console.log(type);
+                 switch(type){ 
+                case "person" : ContractStorage.getPersonName(function(e,r){
+                    document.getElementById('name').innerHTML = r;
+                })
+                case "org" : ContractStorage.getOrgName(function(e,r){
+                    document.getElementById('name').innerHTML = r;
+                })
+                default :  { document.getElementById('name').innerHTML = "미정";}
+                 
+            }
+            })
+            
+            
+            setTimeout(function(){  }, 10000);
+        }
+        
+
+        function setPerson(){
+            let name = document.getElementById('set_pername').value;
+            let birth = document.getElementById('set_perbirth').value;
+
+            ContractStorage.setPerson(name,birth,function(e,r){
+                console.log("person 등록완료");
+            }); 
+
+        }
+
+        function setOragnization(){
+            let name = document.getElementById('set_orgname').value;
+            ContractStorage.setOragnization(name,function(e,r){
+                console.log("org 등록 완료" + r);
+            })
+        }
+
+        function setBelong(){
+            let addr = document.getElementById('setbelong').value;
+
+            ContractStorage.setBelong(addr,function(e,r){
+                console.log("소속증명 확인 " + r);
+            })
+        }
+
+        function setApprove(){
+            let addr = document.getElementById('approve_addr').value;
+            let time = document.getElementById('approve_time').value;
+            //console.log(type);
+            if(!(type=="person")){
+                alert("person인 경우에만 허가가 가능합니다.");
+                return; 
+            }
+
+            ContractStorage.setApprove(addr,time,function(e,r){
+                console.log("참조허가 완료");
+            })
+        }
+
+        function getPerson(){
+            // <h4><열람내역></h4>
+            //     <div>참조 허가 여부 :<span id="allowReference"></span></div>
+            //     <div>승인시점 블록번호 :<span id="approveBlockNo"></span></div>
+            //     <div>열람종료 블록번호 :<span id="refLimitBlockNo"></span></div>
+            //     <div>열람 허용주소 :<span id="applicant"></span></div>
+            //     <div>해당 주소 이름 :<span id="get_name"></span></div>
+            //     <div>해당 주소 나이 :<span id="get_birth"></span></div>
+            //     <div>해당 주소 인증기관 목록 :<span id="get_orglist"></span></div>
+
+            let addr = document.getElementById('get_addr').value;
+
+            ContractStorage.getPerson(addr,function(e,r){
+                document.getElementById('allowReference').innerHTML = r[0];
+                document.getElementById('approveBlockNo').innerHTML = r[1];
+                document.getElementById('refLimitBlockNo').innerHTML = r[2];
+                document.getElementById('applicant').innerHTML = r[3];
+                document.getElementById('get_name').innerHTML = r[4];
+                document.getElementById('get_birth').innerHTML = r[5];
+                document.getElementById('get_orglist').innerHTML = r[6];
+            })
+        }
+
     </script>
 </html>
