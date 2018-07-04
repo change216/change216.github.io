@@ -1,18 +1,21 @@
+pragma solidity ^0.4.11;
+import "https://github.com/change216/change216.github.io/members.sol";
+
 contract Owned {
-    //»óÅÂº¯¼ö
-    address public con_owner;//¼ÒÀ¯ÀÚ ÁÖ¼Ò
+    //ìƒíƒœë³€ìˆ˜
+    address public con_owner;//ì†Œìœ ì ì£¼ì†Œ
     
-    //¼ÒÀ¯ÀÚ º¯°æ½Ã
+    //ì†Œìœ ì ë³€ê²½ì‹œ
     event TransferOwnership(address oldaddr, address newaddr);
     
-    //¼ÒÀ¯ÀÚ ÇÑÁ¤ ¸Ş¼­µå¿ë ¼ö½ÄÀÚ
+    //ì†Œìœ ì í•œì • ë©”ì„œë“œìš© ìˆ˜ì‹ì
     modifier onlyOwner() {if (msg.sender != con_owner) throw; _; }
     
-    //»ı¼ºÀÚ
+    //ìƒì„±ì
     function Owned() {
         con_owner = msg.sender;
     }
-    //¼ÒÀ¯ÀÚ º¯°æ
+    //ì†Œìœ ì ë³€ê²½
     function transferOwnership(address _new) onlyOwner {
         address oldaddr = con_owner;
         con_owner = _new;
@@ -22,19 +25,19 @@ contract Owned {
 
 contract Trans is Owned{
     
-   // uint256 public sellingPrice; //ÆÇ¸Å °¡°İ
-    uint256 public deadline; //±âÇÑ
+   // uint256 public sellingPrice; //íŒë§¤ ê°€ê²©
+    uint256 public deadline; //ê¸°í•œ
     address owner;
     address Memaddress;
     address buyer_owner;
     uint256 ProducrIndex; //->>update
     uint256 public price;
-    bool public isOpened; //¿¡½ºÅ©·Î °³½Ã ÇÃ·¡±×
+    bool public isOpened; //ì—ìŠ¤í¬ë¡œ ê°œì‹œ í”Œë˜ê·¸
     
     
     
     
-    //(3)ÀÌº¥Æ® ¾Ë¸²
+    //(3)ì´ë²¤íŠ¸ ì•Œë¦¼
     event EscrowStart(uint salesVolum, uint sellingPrice, uint deadline, address beneficiary);
     event ConfirmedPayment(address addr, uint amount);
     
@@ -55,16 +58,16 @@ contract Trans is Owned{
 
     function pay(string _id) payable {
         
-        //°³½Ã Àü ¶Ç´Â ±âÇÑÀÌ ³¡³­ °æ¿ì¿¡´Â ¿¹¿ÜÃ³¸®
+        //ê°œì‹œ ì „ ë˜ëŠ” ê¸°í•œì´ ëë‚œ ê²½ìš°ì—ëŠ” ì˜ˆì™¸ì²˜ë¦¬
         if(!isOpened) throw;
         
-        //ÆÇ¸Å°¡°İ ¹Ì¸¸ÀÎ °æ¿ì ¿¹¿ÜÃ³¸®
+        //íŒë§¤ê°€ê²© ë¯¸ë§Œì¸ ê²½ìš° ì˜ˆì™¸ì²˜ë¦¬
         uint amount = msg.value;
         if(amount < price) throw;
         //members[tempaddress].getMyAddress(_id);
         if(members[Memaddress].getMyAddress(_id) != owner) throw;
         
-        //¼ÒÀ¯±Çº¯°æ ¿¡½ºÅ©·Î °³½ÃÇÃ·¡±×¸¦ false·Î ¼³Á¤
+        //ì†Œìœ ê¶Œë³€ê²½ ì—ìŠ¤í¬ë¡œ ê°œì‹œí”Œë˜ê·¸ë¥¼ falseë¡œ ì„¤ì •
         members[Memaddress].setTransOwner(ProducrIndex, msg.sender);
         buyer_owner = msg.sender;
         isOpened = false;
