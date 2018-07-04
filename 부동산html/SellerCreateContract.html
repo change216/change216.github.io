@@ -23,7 +23,7 @@
         <section class="MOD_HERO" style="background-image:url(assets/css/3.png)">
             <div data-layout="_r">
               <div data-layout="de10">
-                <h1>계약 생성하기</h1>
+                <h1>계약 관리(판매자)</h1>
                 <h3>계약을 생성하고 거래를 진행합니다.</h3>
                
               </div>
@@ -150,7 +150,8 @@
                       
                       </ul>
                     </nav>
-                  </div>
+                  </div> 
+        
                   <div data-layout="al-o1 de-o2 de10" class="MOD_SUBNAVIGATION1_Page">
                         <section>
                             <div data-layout="_r" class="MOD_IMPACTSTRIP3">
@@ -161,7 +162,7 @@
                                         <h2 data-theme="_bo3">구매요청 확인하기</h2>
                                         
                                         <ui>
-                                           <li> 매물 인덱스 <input type="text" id="product_index"><button type="button" onclick="createTrans()" >계약만들기</button> 
+                                           <li> 매물 인덱스 <input type="text" id="product_index"/><button type="button" onclick="createTrans()" >계약만들기</button> 
                                             <li>계약 트랜잭션 id : <span id="trans_txid"></span></li>
                                            </ui>
                                         
@@ -173,16 +174,35 @@
      
                                     </div>
                                 </div>
+                                
+                                        <h2 data-theme="_bo3">거래 현황보기</h2>
+                                        
+                                        <ui>
+                                           <li> 계약 트랜잭션 id  <input type="text" id="trans_txid2"/>
+                                            <button type="button" onclick="TransState()" >상태불러오기</button>
+                                         </li>
+                                            <li> 거래 현재상태 : <span id="trans_state"></span> 
+                                            </li>
+                                        </ui>
+                                        
+                                        <button id='MyRequest' type="button" onclick="transClose()"> 거래 완료하기 </button>
+                                        <button id='MyRequest' type="button" onclick="transAllClose()"> 거래 취소하기 </button>
+                                    
+     
+                                    </div>
                             </div>
-
+                         
+           
+</section></section>
       </body>
 
     <script type="text/javascript">
-    var contractAddress = '0xa2a53d284e5104fea4ceb82ca53b38c37682c1fd';
-    var RealEstateTransactionContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"buyerDetail","outputs":[{"name":"flag","type":"bool"},{"name":"id","type":"string"},{"name":"name","type":"string"},{"name":"Tell","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"}],"name":"favoriteProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"GetMyProduct","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"address"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"productArray","outputs":[{"name":"ProductAddress","type":"string"},{"name":"ProductInfo","type":"string"},{"name":"Price","type":"uint256"},{"name":"Tag","type":"string"},{"name":"ProductName","type":"string"},{"name":"ImageHashsrc","type":"string"},{"name":"owner","type":"address"},{"name":"Productnumber","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"IndexToPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"GetMyProductnumber","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_trans","type":"address"}],"name":"getRoomContract","outputs":[{"name":"","type":"address"},{"name":"","type":"address"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_trans","type":"address"},{"name":"buyer","type":"address"},{"name":"seller","type":"address"},{"name":"price","type":"uint256"}],"name":"setRoomContract","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"GetProdctsSize","outputs":[{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getSellerScore","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"GetRequestSize","outputs":[{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"IndexToOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_id","type":"string"},{"name":"_tell","type":"uint256"}],"name":"setBuyer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_ImageHashsrc","type":"string"},{"name":"_ProductAddress","type":"string"},{"name":"_ProductInfo","type":"string"},{"name":"_Price","type":"uint256"},{"name":"_Tag","type":"string"},{"name":"_ProductName","type":"string"}],"name":"SetUploadProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_applicant","type":"address"},{"name":"_span","type":"uint256"}],"name":"SetAllowMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_trans","type":"address"},{"name":"score","type":"uint256"}],"name":"SellerEvaluation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"product_index","type":"uint256"},{"name":"_ImageHashsrc","type":"string"},{"name":"_ProductAddress","type":"string"},{"name":"_ProductInfo","type":"string"},{"name":"_Price","type":"uint256"},{"name":"_Tag","type":"string"},{"name":"_ProductName","type":"string"}],"name":"SetUpdateProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"myaddress","type":"address"}],"name":"setTransOwner","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_owner","type":"address"}],"name":"BuyRequestListPush","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"favoriteProductresult","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_id","type":"string"},{"name":"_tell","type":"uint256"}],"name":"setSeller","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"sellerDetail","outputs":[{"name":"flag","type":"bool"},{"name":"Tell","type":"uint256"},{"name":"reliability","type":"uint256"},{"name":"Status_Numberofpeople","type":"uint256"},{"name":"Status_sum","type":"uint256"},{"name":"Status_avg","type":"uint256"},{"name":"id","type":"string"},{"name":"name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"BuyRequestList","outputs":[{"name":"buyer","type":"address"},{"name":"product_owner","type":"address"},{"name":"product_index","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"string"}],"name":"getMyAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"name":"SetUploadMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DocumentArray","outputs":[{"name":"DocumentName","type":"string"},{"name":"DocumentImageHashsrc","type":"string"},{"name":"DocumentImageInfo","type":"string"},{"name":"Documentowner","type":"address"},{"name":"Documentnumber","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"name":"SetUpdateMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_person","type":"address"},{"name":"_index","type":"uint256"}],"name":"getBuyerDocument","outputs":[{"name":"_allowReference","type":"bool"},{"name":"_approveBlockNo","type":"uint256"},{"name":"_refLimitBlockNo","type":"uint256"},{"name":"_applicant","type":"address"},{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getDocumentList","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getType","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"}]);
+    var contractAddress = '0x889f55a6a9fc273c443c7db6233111ad74840af6';
+    var RealEstateTransactionContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_addr","type":"address"},{"name":"_price","type":"uint256"},{"name":"_owner","type":"address"}],"name":"SetRoomconAddr","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"buyerDetail","outputs":[{"name":"flag","type":"bool"},{"name":"id","type":"string"},{"name":"name","type":"string"},{"name":"Tell","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"}],"name":"favoriteProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"GetMyProduct","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"address"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"productArray","outputs":[{"name":"ProductAddress","type":"string"},{"name":"ProductInfo","type":"string"},{"name":"Price","type":"uint256"},{"name":"Tag","type":"string"},{"name":"ProductName","type":"string"},{"name":"ImageHashsrc","type":"string"},{"name":"owner","type":"address"},{"name":"Productnumber","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"IndexToPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"GetMyProductnumber","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"IndexToContract","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"GetProdctsSize","outputs":[{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getSellerScore","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"score","type":"uint256"}],"name":"SellerEvaluation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"IndexToOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_id","type":"string"},{"name":"_tell","type":"uint256"}],"name":"setBuyer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_ImageHashsrc","type":"string"},{"name":"_ProductAddress","type":"string"},{"name":"_ProductInfo","type":"string"},{"name":"_Price","type":"uint256"},{"name":"_Tag","type":"string"},{"name":"_ProductName","type":"string"}],"name":"SetUploadProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_applicant","type":"address"},{"name":"_span","type":"uint256"}],"name":"SetAllowMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"product_index","type":"uint256"},{"name":"_ImageHashsrc","type":"string"},{"name":"_ProductAddress","type":"string"},{"name":"_ProductInfo","type":"string"},{"name":"_Price","type":"uint256"},{"name":"_Tag","type":"string"},{"name":"_ProductName","type":"string"}],"name":"SetUpdateProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"myaddress","type":"address"}],"name":"setTransOwner","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"favoriteProductresult","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"}],"name":"BuyRequestListPush","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_id","type":"string"},{"name":"_tell","type":"uint256"}],"name":"setSeller","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"sellerDetail","outputs":[{"name":"flag","type":"bool"},{"name":"Tell","type":"uint256"},{"name":"reliability","type":"uint256"},{"name":"Status_Numberofpeople","type":"uint256"},{"name":"Status_sum","type":"uint256"},{"name":"Status_avg","type":"uint256"},{"name":"id","type":"string"},{"name":"name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"string"}],"name":"getMyAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"name":"SetUploadMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DocumentArray","outputs":[{"name":"DocumentName","type":"string"},{"name":"DocumentImageHashsrc","type":"string"},{"name":"DocumentImageInfo","type":"string"},{"name":"Documentowner","type":"address"},{"name":"Documentnumber","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"GetRoomcontractSize","outputs":[{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_val","type":"uint256"}],"name":"SetRoomconValue","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"name":"SetUpdateMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"RoomcontractList","outputs":[{"name":"transaddr","type":"address"},{"name":"buyer","type":"address"},{"name":"seller","type":"address"},{"name":"price","type":"uint256"},{"name":"product_index","type":"uint256"},{"name":"timestamp","type":"uint256"},{"name":"statevalue","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"getRoomconStateValue","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_person","type":"address"},{"name":"_index","type":"uint256"}],"name":"getBuyerDocument","outputs":[{"name":"_allowReference","type":"bool"},{"name":"_approveBlockNo","type":"uint256"},{"name":"_refLimitBlockNo","type":"uint256"},{"name":"_applicant","type":"address"},{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getDocumentList","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getType","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"}]);
     var RealEstateTransactionStorage;
     var transContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"members","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"sellingPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"con_owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Allclose","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"deadline","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"string"}],"name":"pay","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"close","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"isOpened","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"price","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_new","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_temps","type":"address"},{"name":"_index","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"salesVolum","type":"uint256"},{"indexed":false,"name":"sellingPrice","type":"uint256"},{"indexed":false,"name":"deadline","type":"uint256"},{"indexed":false,"name":"beneficiary","type":"address"}],"name":"EscrowStart","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"ConfirmedPayment","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldaddr","type":"address"},{"indexed":false,"name":"newaddr","type":"address"}],"name":"TransferOwnership","type":"event"}]);
-    var trans;
+    var transStorage;
+    var transaddress;
     var myAccount;
 
     window.addEventListener('load', function () {
@@ -214,7 +234,7 @@
     function LoadRequsetList() {
 
         var table = document.getElementById('table1');
-        for(let i =0; i<2;i++){ //전체 배열length받는 함수 작성하거나 방법 찾아야함 임시임
+        for(let i =0; i<10;i++){ //전체 배열length받는 함수 작성하거나 방법 찾아야함 임시임
 
             RealEstateTransactionStorage.BuyRequestList(i,function(e,r){
                 if(r[1]==myAccount){
@@ -225,6 +245,7 @@
                     var cell2 = row.insertCell(1);
                     cell1.innerHTML = "*구매요청자 주소: " + r[0];
                     cell2.innerHTML = ",   요청 매물 인덱스: " + r[2];
+                    console.log(r);
                 }
                 })
         }
@@ -248,6 +269,38 @@
                 }
             })
 
+    }
+
+    function TransState() {
+
+        transaddress= document.getElementById('trans_txid2').value;
+        transStorage = transContract.at(transaddress);
+        transStorage.isOpened(function(e,r){
+            console.log(r);
+
+            if(r) {document.getElementById('trans_state').innerHTML = '<span style="color: red; font-weight:bold">입금 대기중..</span>' }
+            else if(r==false) {document.getElementById('trans_state').innerHTML = '<span style="color: green; font-weight:bold">입금 완료!</span>' }
+            else {document.getElementById('trans_state').innerHTML = '<span style="color: black; font-weight:bold">없는거래 혹은 완료된거래?</span>' }
+            
+            });
+    }
+
+    function transClose() {
+        transaddress= document.getElementById('trans_txid2').value;
+        transStorage = transContract.at(transaddress);
+        transStorage.close(function(e,r){
+            if(!e) {document.getElementById('trans_state').innerHTML = '<span style="color: blue; font-weight:bold, font-size: large" >거래가 완료 되었습니다!</span>' }
+           
+        })
+    }
+
+    function transAllClose() {
+        transaddress= document.getElementById('trans_txid2').value;
+        transStorage = transContract.at(transaddress);
+        transStorage.Allclose(function(e,r){
+            if(!e) {document.getElementById('trans_state').innerHTML = '<span style="color: blue; font-weight:bold, font-size: large" >거래가 취소 되었습니다!</span>' }
+           
+        })
     }
 
     </script>
