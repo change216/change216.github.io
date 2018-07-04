@@ -166,7 +166,9 @@
 
                 <p> 거래 계약주소:  <input type="text" id="transaddr"  style="margin-bottom: 8px;"/> </p>
                 <p> 판매자 id:  <input type="text" id="sellerid"  style="margin-bottom: 8px;"/> </p>
-                <button type="button" onclick="pay()">송금하기</button>
+				<button type="button" onclick="pay()">송금하기</button>
+				<p> 매물인덱스:  <input type="text" id="proindex"  style="margin-bottom: 8px;"/><button type="button" onclick="checkState()">상태확인</button>
+				 계약 상태: <span id="trans_state"/></p>
             </div>
                 
            
@@ -211,23 +213,50 @@
             myAccount= r[0]; 
          })
     
-        
-        
-        var table = document.getElementById('table1');
-        for(let i =0; i<10;i++){ //전체 배열length받는 함수 작성하거나 방법 찾아야함 임시임
+		 RealEstateTransactionStorage.GetRoomcontractSize(function(e,r){ 
+			 let length = r.toNumber(); 
+			 listPrint(length);
+			 })
+        }
 
-            RealEstateTransactionStorage.BuyRequestList(i,function(e,r){
-                if(r[0]==myAccount){
+		function listPrint(length){
+			var table = document.getElementById('table1');
+        	for(let i =0; i<length;i++){ //전체 배열length받는 함수 작성하거나 방법 찾아야함 임시임
+
+            RealEstateTransactionStorage.RoomcontractList(i,function(e,r){
+                if(r[1]==myAccount){
                     //tablepush(r);
 
                     var row = table.insertRow();
                     var cell1 = row.insertCell(0);
-                    cell1.innerHTML = "요청 매물 인덱스: " + r[2];
+					var cell2 = row.insertCell(1);
+                    cell1.innerHTML = "* 요청 매물 인덱스: " + r[4];
+					cell2.innerHTML = ", 계약 주소: " + r[0];
                     console.log(r);
                 }
                 })
         }
-        }
+		}
+
+
+		function checkState() {
+
+			let index = document.getElementById('proindex').value;
+
+			RealEstateTransactionStorage.RoomcontractList(index, function(e,r){
+				console.log(r[6].s);
+				let val = r[6].s;
+				switch(val){
+					case 0: document.getElementById('trans_state').innerHTML = '<span style="color: red; font-weight:bold">구매요청 (계약 생성 전)</span>'; break;
+					case 1: document.getElementById('trans_state').innerHTML = '<span style="color: red; font-weight:bold">입금 대기중..</span>'; break;
+					case 2: document.getElementById('trans_state').innerHTML = '<span style="color: blue; font-weight:bold">입금 완료</span>'; break;
+					case 3: document.getElementById('trans_state').innerHTML = '<span style="color: yellow; font-weight:bold">거래 취소</span>'; break; 
+					case 4: document.getElementById('trans_state').innerHTML = '<span style="color: green; font-weight:bold">거래 완료!!!!★★</span>'; break;
+				}
+			})
+
+		}
+
         
 
         function pay() {

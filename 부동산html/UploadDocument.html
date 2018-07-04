@@ -43,7 +43,7 @@
 
 				<ul class="AP_Menu_List">
 					<li>
-						<a href="#" data-theme="_bgp" style="background-image: url(assets/css/Home.png);background-repeat: no-repeat; background-size: contain; 	background-position: center;" onclick="self.location='http://192.168.0.77:7001/newnewnew/Main.html';"></a>
+						<a href="#" data-theme="_bgp" style="background-image: url(assets/css/Home.png);background-repeat: no-repeat; background-size: contain; 	background-position: center;" onclick="self.location='http://localhost:2001/부동산html/Main.html';"></a>
 					</li>
 					<li>
 						<a href="#" data-theme="_bgp">마이페이지 </a>
@@ -213,7 +213,8 @@ var contractAddress = '0x889f55a6a9fc273c443c7db6233111ad74840af6';
 	});
 
 	function startApp() {
-		RealEstateTransactionStorage = RealEstateTransactionContract.at(contractAddress);}
+		RealEstateTransactionStorage = RealEstateTransactionContract.at(contractAddress);
+		}
 
 	function upload() {
 		document.getElementById('board2').innerHTML = '<span style="color: red; font-weight:bold">이미지 등록중..</span>'

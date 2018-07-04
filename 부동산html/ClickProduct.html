@@ -273,7 +273,7 @@
 	}
 
 	function BuyRequest(){
-		RealEstateTransactionStorage.BuyRequestListPush(Productindex,prdt_owner,function(e,r){
+		RealEstateTransactionStorage.BuyRequestListPush(Productindex,function(e,r){
 			
 			if(!e) {alert( prdt_owner + "에게 구매요청 하였습니다.");}
 		})
