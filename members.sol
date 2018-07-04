@@ -1,6 +1,5 @@
 pragma solidity ^0.4.11;
 
-import "https://github.com/change216/change216.github.io/trans.sol";
 
 contract Members {
     
@@ -70,7 +69,7 @@ contract Members {
         uint256 product_index;
     }
 
-    //º»ÀÎ È®ÀÎ Á¤º¸
+    //ë³¸ì¸ í™•ì¸ ì •ë³´
     struct AllowMyDocument 
     {
         bool allowReference;
@@ -213,7 +212,7 @@ contract Members {
       Tag:        _Tag,
       ProductName:_ProductName,
       Productnumber: ProductIndex ,
-      owner:      msg.sender //ÆÇ¸ÅÀÚ ÁÖ¼Ò
+      owner:      msg.sender //íŒë§¤ì ì£¼ì†Œ
       }));
       
      sellerDetail[msg.sender].Productnumber.push(ProductIndex);
