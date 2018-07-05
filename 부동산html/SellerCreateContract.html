@@ -175,7 +175,7 @@
                                         <h2 data-theme="_bo3">거래 현황보기</h2>
                                         
                                         <ui>
-                                           <li> 계약 트랜잭션 id  <input type="text" id="trans_txid2"/>
+                                           <li> 계약 트랜잭션 id:   <input type="text" id="trans_txid2"/>
                                             <button type="button" onclick="TransState()" >상태불러오기</button>
                                          </li>
                                             <li> 거래 현재상태 : <span id="trans_state"></span> 
@@ -201,6 +201,7 @@ var RealEstateTransactionStorage;
     var transStorage;
     var transaddress;
     var myAccount;
+    var length;
 
     window.addEventListener('load', function () {
 
@@ -232,14 +233,11 @@ var RealEstateTransactionStorage;
 
 
         RealEstateTransactionStorage.GetRoomcontractSize(function(e,r){ 
-			let length = r.toNumber(); 
+			length = r.toNumber(); 
             console.log(length);
-            ddd(length);
-        });
-    }
+           
 
-    function ddd(length){
-        var table = document.getElementById('table1');
+            var table = document.getElementById('table1');
             for(let i =0; i<length;i++){
 
                 RealEstateTransactionStorage.RoomcontractList(i,function(e,r){
@@ -249,13 +247,17 @@ var RealEstateTransactionStorage;
                         var row = table.insertRow();
                         var cell1 = row.insertCell(0);
                         var cell2 = row.insertCell(1);
+                        var cell3 = row.insertCell(2);
                         cell1.innerHTML = "*구매요청자 주소: " + r[1];
                         cell2.innerHTML = ",   요청 매물 인덱스: " + r[4];
+                        cell3.innerHTML = ",   계약 주소: " + r[0];
                         console.log(r);
                     }
                     });
             }
+        });
     }
+
 
     function createTrans() {
 
@@ -279,17 +281,33 @@ var RealEstateTransactionStorage;
 
     function TransState() {
 
-        transaddress= document.getElementById('trans_txid2').value;
-        transStorage = transContract.at(transaddress);
-        transStorage.isOpened(function(e,r){
-            console.log(r);
+        	transaddress= document.getElementById('trans_txid2').value;
+            RealEstateTransactionStorage.GetRoomcontractSize(function(e,r){ 
+			length = r.toNumber();});
+           
+            for(let i=0;i<length;i++){
 
-            if(r) {document.getElementById('trans_state').innerHTML = '<span style="color: red; font-weight:bold">입금 대기중..</span>' }
-            else if(r==false) {document.getElementById('trans_state').innerHTML = '<span style="color: green; font-weight:bold">입금 완료!</span>' }
-            else {document.getElementById('trans_state').innerHTML = '<span style="color: black; font-weight:bold">없는거래 혹은 완료된거래?</span>' }
-            
+                RealEstateTransactionStorage.RoomcontractList(i,function(e,r){
+                
+                if(r[0]==transaddress){
+                        
+                        console.log(r[6].c["0"]);
+                        let val = r[6].c["0"];
+                        switch(val){
+                            case 0: document.getElementById('trans_state').innerHTML = '<span style="color: red; font-weight:bold">구매요청 (계약 생성 전)</span>'; break;
+                            case 1: document.getElementById('trans_state').innerHTML = '<span style="color: red; font-weight:bold">입금 대기중..</span>'; break;
+                            case 2: document.getElementById('trans_state').innerHTML = '<span style="color: blue; font-weight:bold">입금 완료</span>'; break;
+                            case 3: document.getElementById('trans_state').innerHTML = '<span style="color: yellow; font-weight:bold">거래 취소</span>'; break; 
+                            case 4: document.getElementById('trans_state').innerHTML = '<span style="color: green; font-weight:bold">거래 완료!!!!★★</span>'; break;
+                        }
+  
+                }
+               
             });
+
+        }
     }
+    
 
     function transClose() {
         transaddress= document.getElementById('trans_txid2').value;
