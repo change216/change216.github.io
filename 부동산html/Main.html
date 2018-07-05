@@ -50,6 +50,9 @@
 					<li>
 							<a href="#" data-theme="_bgp">마이페이지 </a>
 							<ul>
+                  <li>
+                      <a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.26:2001/부동산html/FavoriteProducts.html';">찜 목록</a>
+                  </li>
 									<li>
 										<a href="#" data-theme="_bgpd"  onclick="self.location='http://localhost:2001/부동산html/UploadDocument.html';">서류 등록</a>
 									</li>
@@ -94,7 +97,10 @@
                 </li>
                 <li>
 									<a href="#" onclick="self.location='http://localhost:2001/부동산html/BuyerCreateContract.html';" data-theme="_bgpd">계약 관리</a>
-								</li>
+                </li>
+                <li>
+                    <a href="#" onclick="self.location='http://localhost:2001/부동산html/EvaluationSeller.html';" data-theme="_bgpd">판매자 평가하기</a>
+                  </li>
 							</ul>
 					</li>
 
@@ -129,30 +135,31 @@
     <div data-layout="al16 al-o2 de-o1 de6 ec4">
       <nav class="MOD_SUBNAVIGATION1_Menu" data-theme="_bo2">
         <p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs"></p>
-		<ul>
-			<li>
-				<a href="#">ALL</a>
-			</li>
-			<li>
-				<a  href="#">아파트</a>
-			</li>
-			<li>
-				<a  href="#">빌라</a>
-			</li>
-			<li>
-				<a  href="#">주택</a>
-			</li>
-			<li>
-				<a  href="#">미정</a>
-			</li>
-			<li>
-				<a href="#">미정</a>
-			</li>
-			<li>
-				<a href="#">미정</a>
-			</li>
-		
-		</ul>
+        <ul>
+            <li>
+              <a id="tag0" href="#" onclick="TagChange(this.id)">ALL</a>
+            </li>
+            <li>
+              <a id="tag1" href="#" onclick="TagChange(this.id)">아파트</a>
+            </li>
+            <li>
+              <a id="tag2" href="#" onclick="TagChange(this.id)">빌딩</a>
+            </li>
+            <li>
+              <a  id="tag3" href="#" onclick="TagChange(this.id)">빌라</a>
+            </li>
+            <li>
+              <a  id="tag4" href="#" onclick="TagChange(this.id)">주택</a>
+            </li>
+            <li>
+              <a href="#">미정</a>
+            </li>
+            <li>
+              <a href="#">미정</a>
+            </li>
+          
+          </ul>
+      
       </nav>
 	</div>
 	
@@ -271,7 +278,8 @@
   var create = 0;
   var lTag;
 	var Productindex;
-  //
+  var tagid = "";
+
 
   window.addEventListener('load', function () {
 
@@ -285,18 +293,28 @@
       window.web3 = new Web3(new Web3.providers.HttpProvider("http://192.168.0.77:7001"));
     }
     // Now you can start your app & access web3 freely:
+    var catchindex = location.href.split("#");
+
+    if(catchindex.length > 1)
+	{
+		tagid = catchindex[1];
+	}
+	else{
+		tagid ="tag0"
+	}
     startApp();
+
   });
 
   function startApp() {
     RealEstateTransactionStorage = RealEstateTransactionContract.at(contractAddress);
     //   document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
     
-    LoadProducts();
+    LoadProducts(tagid);
 
   }
   //상품 진열자리 동적생성
-  function createLocation(){
+  function createLocation(create){
 
         for(create; create<count;create++)
         {
@@ -305,18 +323,15 @@
         div1.setAttribute("data-layout","ch8 ec4")
         document.getElementById("TGT").appendChild(div1);
 
-		//TGTTT+create라는 요소. 누르면 상세정보 OnClickProduct로 간다
+		//TGTTT+create라는 a 요소 . a는 링크와 관련된 요소. 누르면 상세정보 OnClickProduct로 간다
         a =  document.createElement("a");
         a.setAttribute("id","TGTTT"+create);
         a.setAttribute("href","#");
         a.setAttribute("class","MOD_FEATURE_Container");
-		a.setAttribute("onclick","OnClickProduct(this.id)");
-				
-				// a.setAttribute("onclick","self.location='http://192.168.0.77:7001/newnewnew/ClickProduct.html';");
-			
-
+		    a.setAttribute("onclick","OnClickProduct(this.id)");
         document.getElementById("TGTT"+create).appendChild(a);
-
+        
+        //이미지가 들어가는 요소
         tagetimg = document.createElement("img");
         tagetimg.setAttribute("id","Pic"+create);
         tagetimg.setAttribute("class","MOD_FEATURE_Picture");
@@ -370,59 +385,81 @@
 		var realpruindex = document.getElementById("Productindex"+table[1]).textContent;
 		 window.open("ClickProduct.html?create:"+realpruindex);
 	}
-	
-  //모든 상품 불러오기
-  function LoadProducts() {
+	  //모든 상품 불러오기
+    function LoadProducts(tagid) {
 
-    RealEstateTransactionStorage.GetProdctsSize(function (e, r) {
-      //상품배열 크기 받아오기
-      count = r.c["0"]
-      //상품배열 크기가 현재 상품 진열크기보다 크면 호출
-      if(count > create)
-      {
-        createLocation();
-      }
+RealEstateTransactionStorage.GetProdctsSize(function (e, r) {
+  //상품배열 크기 받아오기
+  count = r.c["0"]
+  //상품배열 크기가 현재 상품 진열크기보다 크면 호출
 
-      //배열의 크기만큼 상품 받아오기
-      for (var i = 0; i < count; i++) {
-        RealEstateTransactionStorage.productArray(i, function (e, r) {
-
-          if (index <= count) {
-
-            var Pic = document.getElementById('Pic' + index);
-
-            imageArray = r[5].split('##');
-
-            var convert = r[2]/10**18;
-
-            document.getElementById('PicPrice' + index).innerHTML = convert +' <span style="color: blueviolet; font-weight:bold">ETH</span>';
-            document.getElementById('PicInfo' + index).innerHTML = r[1];
-            document.getElementById('PicTitle' + index).innerHTML = r[4];
-            document.getElementById('Tag' + index).innerHTML = r[3];
-			document.getElementById('Productindex'+index).innerHTML = "No."+r[7];
-
-            let ShowProducturl = "http://ipfs.io/ipfs/" + imageArray[0];
-            Pic.src = ShowProducturl;
-            Pic.width =200;
-            Pic.height = 200;
-            index++;
-
-          }
-        })
-      }
+  //배열의 크기만큼 상품 받아오기
+  for (var i = 0; i < count; i++) {
+    RealEstateTransactionStorage.productArray(i, function (e, r) {
+  if(tagid == "tag0")
+  {
+    createLocation(create);
+    InsertProduct(r);
+    create++
+  }
+  else if(tagid == "tag1" && r[3] == "아파트")
+  {
+    createLocation(create);
+    InsertProduct(r);
+    create++
+  }
+  else if(tagid == "tag2" && r[3] == "빌딩")
+  {
+    createLocation(create);
+    InsertProduct(r);
+    create++
+  }
+  else if(tagid == "tag3" && r[3] == "빌라")
+  {
+    createLocation(create);
+    InsertProduct(r);
+    create++
+  }
+  else if(tagid == "tag4" && r[3] == "주택")
+  {
+    createLocation(create);
+    InsertProduct(r);
+    create++
+  }
     })
 
+  }
 
-  }
-  //콤보박스 값 받아오기
-  function chageLangSelect() {
-    var langSelect = document.getElementById("id-lang");
-    //태그에 저장
-    Tag = langSelect.options[langSelect.selectedIndex].text;
-  }
-  function getLink(addr) {
-    return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr + '</a>';
-  }
+})
+}
+
+function InsertProduct(r) {
+var Pic = document.getElementById('Pic' + index);
+imageArray = r[5].split('##');
+var convert = r[2] / 10 ** 18;
+document.getElementById('PicPrice' + index).innerHTML = convert + ' <span style="color: blueviolet; font-weight:bold">ETH</span>';
+document.getElementById('PicInfo' + index).innerHTML = r[1];
+document.getElementById('PicTitle' + index).innerHTML = r[4];
+document.getElementById('Tag' + index).innerHTML = r[3];
+document.getElementById('Productindex' + index).innerHTML = "No." + r[7];
+let ShowProducturl = "http://ipfs.io/ipfs/" + imageArray[0];
+Pic.src = ShowProducturl;
+Pic.width = 200;
+Pic.height = 200;
+index++;
+}
+
+function TagChange(_tagid){
+document.getElementById('TGT').innerHTML = "";
+// LoadProducts(_tagid);
+window.open("Main.html?#"+_tagid,"_self");
+
+}
+function getLink(addr) {
+return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr + '</a>';
+}
+
+
   
 </script>
 

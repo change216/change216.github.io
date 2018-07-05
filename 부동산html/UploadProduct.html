@@ -185,7 +185,7 @@
 									</select>
 								</p>
 								<p>매물 이미지 :
-									<input type="file" name="photo" id="photo" style="margin-bottom: 8px;">
+									<input type="file" multiple name="photo" id="photo" style="margin-bottom: 8px;">
 								</p>
 								<button onMouseover="this.style.color='red';" onMouseout="this.style.color='black';" class="documentbtn" type="button" onclick="upload()">매물 이미지 등록</button>
 								<button onMouseover="this.style.color='red';" onMouseout="this.style.color='black';" class="documentbtn" id="OnUploadProductbtn"
@@ -252,6 +252,8 @@ var RealEstateTransactionStorage;
 		RealEstateTransactionStorage = RealEstateTransactionContract.at(contractAddress);
 		}
 
+
+
 	function upload() {
 		document.getElementById('board2').innerHTML = '<span style="color: red; font-weight:bold">이미지 불러오기 중...</span>'
 		const reader = new FileReader();
@@ -265,7 +267,7 @@ var RealEstateTransactionStorage;
 				}
 				let url = `http://ipfs.io/ipfs/${result[0].hash}`
 				imagehashArray.push(result[0].hash);
-
+				
 				console.log(`Url --> ${url}`)
 				imagemake()//IPFS 에 업로드된 이미지들 확인.
 			})
@@ -285,6 +287,7 @@ var RealEstateTransactionStorage;
 
 		for (var i = 0; i < imagehashArray.length; i++) {
 			imagesetting(i);
+			console.log(i + " 와와와 " + imagehashArray);
 		}
 		document.getElementById('board2').innerHTML = '<span style="color: green; font-weight:bold">이미지 불러오기 완료</span>';
 	}

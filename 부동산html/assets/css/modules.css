@@ -306,10 +306,47 @@ label {
   }
 }
 input {
-  width: 100%;
-  max-width: 44rem;
+  width: 60%;
+  position: absolute;
+  right: 26.8%;
   font-size: 1em;
-  font-family: sans-serif;
+}
+createcontract{
+  margin:0;
+}
+createcontract[type="text"]{
+
+  border:none;
+  font-size:1em;
+  padding-left: 5px;
+  font-style: oblique;
+  display:inline;
+  outline:none;
+  box-sizing: border-box;
+  color:black;
+
+}
+createcontract[type=button]{
+
+  background-color: lightgray;
+  border:none;
+  background-color: white;
+  font-size:1em;
+  color:#042AaC;
+  outline:none;
+  display:inline;
+  margin-left: -10px;
+  box-sizing: border-box;
+}
+createcontract[type=button]:hover{
+  background-color: lightgray;
+}
+
+createcontract{
+  width: 60%;
+  position: absolute;
+  right: 26.8%;
+  font-size: 1em;
 }
 
 textarea {
@@ -325,19 +362,13 @@ textarea {
   padding: 0 1rem;
 }
 .subpics{
- 
-  min-width: 5rem;
-   width: 35rem; height: 30%;
+
+  position: static;
+   width: 35.1rem; 
    margin: 36rem 0rem 0 3rem;
+
 }
-.subpicupload{
-  height:70px;
-  width :70px;
-  margin :0rem 0rem 0rem 0.5rem;
-  border:2px solid black;
-  size: contain;
-  position: center;
-}
+
 /* Staff1 */
 .MOD_STAFF_Picture {
   border-radius: 50%;
@@ -502,13 +533,29 @@ textarea {
   font-size: 1.5em;
   cursor: pointer;
   position: relative;
+  margin: 0 3rem 0 0;
+  left: 3rem;
+}
+.custombutom2{
+  background-color: #4d36bd00;
+  color:black;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0.2em 1em 0.2em 1em;
+  border-radius: 5px;
+  border: 2px solid black;
+  top: 1rem;
+  font-size: 1.5em;
+  cursor: pointer;
+  position: relative;
+
   
-  left: 5.5rem;
 }
 .subpic{
   height : 70px;
   width :70px;
-  margin : 0 0.5rem 0 0;
+  margin : 0 0.5rem 0.5rem 0;
   border : 2px solid black;
   background-size: cover;
   background-position: center;
@@ -1622,6 +1669,7 @@ img.MOD_PROMOBOX1_Img {
   background-color: white;
   color: black;
 
+  
 
 
 }
@@ -1632,7 +1680,7 @@ body .MOD_IMPACTSTRIP3_Txt {
   position: absolute;
   left: 220px;
 
-  width: 75%;
+  width: 1306px;
 
 }
 body .MOD_IMPACTSTRIP3_Txt h2 {
@@ -1642,15 +1690,18 @@ body .MOD_IMPACTSTRIP3_Txt h2 {
   padding: 0 0 1rem 0;
   width: 250px;
   border-bottom: 2px solid black;
+  
 
 }
 body .MOD_IMPACTSTRIP3_Txt p {
   font-size: 1.2em;
-  margin: 3rem 0 0 0rem;
+  margin: 3rem 0 0.5rem 0rem;
+  padding: 0 0 0.5rem 0;
   font-weight: bold;
   border-bottom: 2px solid black;
 
   width: 73.3%;
+
 
 
 }
