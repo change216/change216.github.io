@@ -323,18 +323,24 @@
     function transClose() {
         transaddress= document.getElementById('trans_txid2').value;
         transStorage = transContract.at(transaddress);
-        
-
-        transStorage.ProducrIndex(function(e,r){console.log(r.c["0"]);
-            RealEstateTransactionStorage.SetUpdateProduct(r.c["0"],"QmRTCDDV4jqLuAjet8bVDJYsc9sjxZJ3ijaVpr9NPDRiPP","","Sold Out","","","판매완료",function(e,r){
-           console.log("변경 트랜잭션"+r);
-            });
-            transStorage.close(function(e,r){
-                if(!e) {alert("거래가 완료!! 되었습니다!"); }
-            
-            });
+        transStorage.ProducrIndex(function(e,r){
+        RealEstateTransactionStorage.SetUpdateProduct(r.c["0"],"QmRTCDDV4jqLuAjet8bVDJYsc9sjxZJ3ijaVpr9NPDRiPP##","","Sold Out","","","판매완료",function(e,r){
+            if(!e)
+                {console.log("변경 트랜잭션"+r);}
         })
-        
+        })
+
+        // transStorage.ProducrIndex(function(e,r){
+        //     console.log(r.c["0"]);
+        //     RealEstateTransactionStorage.SetUpdateProduct(r.c["0"],"QmRTCDDV4jqLuAjet8bVDJYsc9sjxZJ3ijaVpr9NPDRiPP","","Sold Out","","","판매완료",function(e,r){
+        //     if(!e)
+        //         {console.log("변경 트랜잭션"+r);}
+        //         transStorage.close(function(e,r){
+        //             if(!e) {alert("거래가 완료!! 되었습니다!"); }
+                    
+        //         });
+        //     });          
+        // })
     }
 
     function transAllClose() {
