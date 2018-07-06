@@ -246,6 +246,13 @@
 	  for (var i = 0; i < imageArray.length-1; i++) {
 		  if(imageArray[i].length > 15 && imageArray[i] != "")
 		  {
+			  console.log(imageArray[i])
+
+			  if(imageArray[i] =="QmRTCDDV4jqLuAjet8bVDJYsc9sjxZJ3ijaVpr9NPDRiPP") {
+			  
+				document.getElementById('Requestbtn').disabled = true;
+			  }
+
 			  if (mainpic > 0) {
 				  var Pic = document.getElementById('Pic');
 				  let ShowProducturl = "http://ipfs.io/ipfs/" + imageArray[i];
