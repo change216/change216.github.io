@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>IPFS Image Upload</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+	<script src="https://cdn.rawgit.com/ethereumjs/browser-builds/ddb27f8d/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+	<script src="https://unpkg.com/ipfs-api/dist/index.min.js"></script>
+
+	<link rel="stylesheet" href="assets/css/style.min.css">
+	<link rel="stylesheet" href="assets/css/modules.css">
+
+	<style>
+	</style>
+
+</head>
+
+<body>
+
+	<!-- <section class="MOD_HERO" style="background-image:url(https://unsplash.it/1400/?random)"> -->
+	<section class="MOD_HERO" style="background-image:url(assets/css/3.png)">
+		<div data-layout="_r">
+			<div data-layout="de10">
+				<h1>서류 정보</h1>
+				<h3>서류의 자세한 정보를 가져옵니다</h3>
+
+			</div>
+		</div>
+	</section>
+	<section class="MOD_MENU" data-theme="_bgp">
+		<div data-layout="_r" class="nopadding">
+			<nav class="MOD_MENU_Nav">
+				<!-- <p class="MOD_MENU_Title">Menu</p> -->
+								
+				<!-- <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+					<rect width="30" height="6"/>
+					<rect y="24" width="30" height="6"/>
+					<rect y="12" width="30" height="6"/>
+				</svg> -->
+
+				<ul class="AP_Menu_List">
+					<li>
+						<a href="#" class="Homebtn" style="background-image: url(assets/css/Home.png);background-repeat: no-repeat; background-size: contain; 	background-position: center;" onclick="self.location='http://192.168.0.77:7001/newnewnew/Main.html';"></a>
+					</li>
+					<li>
+							<a href="#" data-theme="_bgp">마이페이지 </a>
+							<ul>
+									<li>
+										<a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.77:7001/newnewnew/FavoriteProducts.html';">찜 목록</a>
+									</li>
+									
+									<li>
+										<a href="#" data-theme="_bgpd" onclick="self.location='http://192.168.0.77:7001/newnewnew/MyDocument.html';" >내 서류</a>
+									</li>
+									<li>
+										<a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.77:7001/newnewnew/UpdateDocument.html';">내 서류 변경</a>
+									</li>
+									<li>
+										<a href="#" data-theme="_bgpd" >내 서류 열람 허가</a>
+									</li>
+
+							</ul>
+					</li>
+					 
+					<li>
+						<a href="#" data-theme="_bgp" >판매자</a>
+						<ul>
+							<li>
+								<a href="#" onclick="self.location='http://192.168.0.77:7001/newnewnew/RegisterSeller.html';" data-theme="_bgpd">판매자 등록</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.77:7001/newnewnew/UploadDocument.html';">서류 등록</a>
+							</li>
+
+							<li>
+								<a href="#" onclick="self.location='http://192.168.0.77:7001/newnewnew/UploadProduct.html';" data-theme="_bgpd">매물 등록</a>
+							</li>
+							<li>
+								<a href="#" onclick="self.location='http://192.168.0.77:7001/newnewnew/UpdateProduct.html';" data-theme="_bgpd">매물 변경</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd">내 매물</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="#" data-theme="_bgp">구매자</a>
+						<ul>
+							<li>
+								<a href="#" onclick="self.location='http://192.168.0.77:7001/newnewnew/RegisterBuyer.html';" data-theme="_bgpd">구매자 등록</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.77:7001/newnewnew/UploadDocument.html';">서류 등록</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 4</a>
+					</li>
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 5</a>
+					</li>
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 6</a>
+						<ul>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+	<section class="MOD_SUBNAVIGATION1">
+		<div data-layout="_r">
+			<div data-layout="al16 al-o2 de-o1 de6 ec4">
+				<nav class="MOD_SUBNAVIGATION1_Menu" data-theme="_bo2">
+					<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs"></p>
+					<ul>
+						<li>
+							<a href="#">ALL</a>
+						</li>
+						<li>
+							<a href="#">아파트</a>
+						</li>
+						<li>
+							<a href="#">빌라</a>
+						</li>
+						<li>
+							<a href="#">주택</a>
+						</li>
+						<li>
+							<a href="#">미정</a>
+						</li>
+						<li>
+							<a href="#">미정</a>
+						</li>
+						<li>
+							<a href="#">미정</a>
+						</li>
+
+					</ul>
+				</nav>
+			</div>
+
+			<div data-layout="al-o1 de-o2 de10" class="MOD_SUBNAVIGATION1_Page">
+				<section class="MOD_PROMOBOX1">
+					<div id="Pic" data-layout="_r" class="MOD_PROMOBOX1_Background">
+						<div data-layout="al16 de8" class="MOD_PROMOBOX1_Blank">
+						</div>
+						<div data-layout="al16 de8" class="MOD_PROMOBOX1_Content">
+							<p id="DocumentName"></p>
+							<p id="DocumentInfo"></p>
+							<p id="DocumentIndex"></p>
+						</div>
+					</div>
+				</section>
+
+				<div class="subpics" id="subPic"></div>
+				</br>
+				</br>
+				</br>
+				</br>
+			</div>
+
+		</div>
+
+	</section>
+	<script src="./modul.js"></script>
+</body>
+
+<script type="text/javascript">
+
+var RealEstateTransactionContract;
+var RealEstateTransactionStorage;
+  var imageArray = new Array();
+  var Tag;
+  var count = 0; //상품 배열 최대크기
+  var index = 0; //인덱스용 (상품 삽입)
+  var Documentindex;
+
+
+	window.addEventListener('load', function () {
+
+		// Checking if Web3 has been injected by the browser (Mist/MetaMask)
+		if (typeof web3 !== 'undefined') {
+			// Use Mist/MetaMask's provider
+			window.web3 = new Web3(web3.currentProvider);
+		} else {
+			console.log('No web3? You should consider trying MetaMask!')
+			// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+			window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7001"));
+		}
+		var catchindex = location.href.split("NO.");
+		Documentindex = catchindex[1];
+
+		// Now you can start your app & access web3 freely:
+		startApp();
+	});
+
+	function startApp() {
+		RealEstateTransactionContract = web3.eth.contract(abi);
+		RealEstateTransactionStorage = RealEstateTransactionContract.at(contractAddress);
+		LoadDocument();
+
+	}
+	//모든 상품 불러오기
+	function LoadDocument() {
+		//내 서류 인덱스 받아오기
+		RealEstateTransactionStorage.DocumentArray(Documentindex, function (e, r) {
+			InsertDocument(r);
+			LoadImage();
+		})
+	}
+	//서류 불러오기
+	function LoadImage() {
+		var mainpic = 1;
+		for (var i = 0; i < imageArray.length - 1; i++) {
+			if (imageArray[i].length > 15 && imageArray[i] != "") {
+				InsertImage(i,mainpic);
+				mainpic = -1;
+			}
+		}
+	}
+	//서류 데이터 삽입
+	function InsertDocument(r) {
+		imageArray = r[1].split('##');
+		document.getElementById('DocumentName').innerHTML = "서류 이름 : " + r[0];
+		document.getElementById('DocumentInfo').innerHTML = "서류 정보 : " + r[2];
+		document.getElementById('DocumentIndex').innerHTML = "서류 번호 : " + r[4];
+	}
+	//이미지 데이터 삽입
+	function InsertImage(Imageindex,mainpic) {
+		if (mainpic > 0) {
+			var Pic = document.getElementById('Pic');
+			let ShowProducturl = "http://ipfs.io/ipfs/" + imageArray[Imageindex];
+			Pic.style = "background-image:url(" + ShowProducturl + ")";
+		}
+		
+		img = document.createElement('button');
+		let loadimageurl = "http://ipfs.io/ipfs/" + imageArray[Imageindex];
+		img.setAttribute("id", "SubPic" + Imageindex);
+		img.setAttribute("class", "subpic");
+
+		img.setAttribute("onclick", "OnClickSubPic(this.id)");
+		img.style = "background-image:url(" + loadimageurl + ")";
+		document.getElementById('subPic').appendChild(img);
+
+
+	}
+	//작은 이미지 클릭시 큰이미지와 교체
+	function OnClickSubPic(_id) {
+		_id = _id.split('SubPic');
+		var index = _id[1];
+		var Pic = document.getElementById('Pic');
+		let ShowProducturl = "http://ipfs.io/ipfs/" + imageArray[index];
+		Pic.style = "background-image:url(" + ShowProducturl + ")";
+	}
+
+	function getLink(addr) {
+		return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr + '</a>';
+	}
+
+
+
+</script>
+
+</html>

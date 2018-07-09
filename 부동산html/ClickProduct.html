@@ -258,6 +258,10 @@
 	 function LoadImage() {
 		var mainpic = 1;
 		for (var i = 0; i < imageArray.length - 1; i++) {
+			
+		   if(imageArray[i]=="QmVPk6tQDvCvc9SbrBxnyjQGSpqTM1UhiokvWHiG2RJvx") {
+			document.getElementById('buybtn').disabled = 'disabled';
+		   }
 		   if (imageArray[i].length > 15 && imageArray[i] != "") {
 			  InsertImage(mainpic);
 			  mainpic = -1;

@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>IPFS Image Upload</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+	<script src="https://cdn.rawgit.com/ethereumjs/browser-builds/ddb27f8d/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+	<script src="https://unpkg.com/ipfs-api/dist/index.min.js"></script>
+
+	<link rel="stylesheet" href="assets/css/style.min.css">
+	<link rel="stylesheet" href="assets/css/modules.css">
+
+	<style>
+	</style>
+
+</head>
+
+<body>
+	<!-- <section class="MOD_HERO" style="background-image:url(https://unsplash.it/1400/?random)"> -->
+	<section class="MOD_HERO" style="background-image:url(assets/css/3.png)">
+		<div data-layout="_r">
+			<div data-layout="de10">
+				<h1>구매자 등록</h1>
+				<h3>구매자를 등록합니다</h3>
+
+			</div>
+		</div>
+	</section>
+	<section class="MOD_MENU" data-theme="_bgp">
+		<div data-layout="_r" class="nopadding">
+			<nav class="MOD_MENU_Nav">
+				<!-- <p class="MOD_MENU_Title">Menu</p> -->
+								
+				<!-- <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+					<rect width="30" height="6"/>
+					<rect y="24" width="30" height="6"/>
+					<rect y="12" width="30" height="6"/>
+				</svg> -->
+
+				<ul class="AP_Menu_List">
+					<li>
+						<a href="#" class="Homebtn" style="background-image: url(assets/css/Home.png);background-repeat: no-repeat; background-size: contain; 	background-position: center;" onclick="self.location='http://192.168.0.77:7001/newnewnew/Main.html';"></a>
+					</li>
+					<li>
+							<a href="#" data-theme="_bgp">마이페이지 </a>
+							<ul>
+									<li>
+										<a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.77:7001/newnewnew/FavoriteProducts.html';">찜 목록</a>
+									</li>
+									
+									<li>
+										<a href="#" data-theme="_bgpd" onclick="self.location='http://192.168.0.77:7001/newnewnew/MyDocument.html';" >내 서류</a>
+									</li>
+									<li>
+										<a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.77:7001/newnewnew/UpdateDocument.html';">내 서류 변경</a>
+									</li>
+									<li>
+										<a href="#" data-theme="_bgpd" >내 서류 열람 허가</a>
+									</li>
+
+							</ul>
+					</li>
+					 
+					<li>
+						<a href="#" data-theme="_bgp" >판매자</a>
+						<ul>
+							<li>
+								<a href="#" onclick="self.location='http://192.168.0.77:7001/newnewnew/RegisterSeller.html';" data-theme="_bgpd">판매자 등록</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.77:7001/newnewnew/UploadDocument.html';">서류 등록</a>
+							</li>
+
+							<li>
+								<a href="#" onclick="self.location='http://192.168.0.77:7001/newnewnew/UploadProduct.html';" data-theme="_bgpd">매물 등록</a>
+							</li>
+							<li>
+								<a href="#" onclick="self.location='http://192.168.0.77:7001/newnewnew/UpdateProduct.html';" data-theme="_bgpd">매물 변경</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd">내 매물</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="#" data-theme="_bgp">구매자</a>
+						<ul>
+							<li>
+								<a href="#" onclick="self.location='http://192.168.0.77:7001/newnewnew/RegisterBuyer.html';" data-theme="_bgpd">구매자 등록</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd"  onclick="self.location='http://192.168.0.77:7001/newnewnew/UploadDocument.html';">서류 등록</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 4</a>
+					</li>
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 5</a>
+					</li>
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 6</a>
+						<ul>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+
+	<section class="MOD_SUBNAVIGATION1">
+		<div data-layout="_r">
+			<div data-layout="al16 al-o2 de-o1 de6 ec4">
+				<nav class="MOD_SUBNAVIGATION1_Menu" data-theme="_bo2">
+					<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs"></p>
+					<ul>
+						<li>
+							<a href="#">ALL</a>
+						</li>
+						<li>
+							<a href="#">아파트</a>
+						</li>
+						<li>
+							<a href="#">빌라</a>
+						</li>
+						<li>
+							<a href="#">주택</a>
+						</li>
+						<li>
+							<a href="#">미정</a>
+						</li>
+						<li>
+							<a href="#">미정</a>
+						</li>
+						<li>
+							<a href="#">미정</a>
+						</li>
+
+					</ul>
+				</nav>
+			</div>
+
+			<div data-layout="al-o1 de-o2 de10" class="MOD_SUBNAVIGATION1_Page">
+				<section>
+					<div data-layout="_r" class="MOD_IMPACTSTRIP3">
+
+						<div data-layout="al16 de8" class="MOD_IMPACTSTRIP3_TxtContainer" data-theme="_bgd">
+
+							<div class="MOD_IMPACTSTRIP3_Txt">
+								<h2 data-theme="_bo3">구매자 등록</h2>
+								<p>구매자 이름 :
+									<input class="inputbar" id='SetBuyerName'> </p>
+								<p>구매자 ID :
+									<input class="inputbar" id='SetBuyerId'>
+								</p>
+								<p>구매자 Tell. :
+									<input class="inputbar" id='SetBuyerTell' >
+								</p>
+								<button onMouseover="this.style.color='red';" onMouseout="this.style.color='black';" class="custombutom" id="OnkRegisterBuyerbtn"
+								type="button" style="margin: 5rem 0 0 8rem; padding: 0 15rem 0 15rem;"; onclick="OnclickRegisterBuyer()">등록</button>
+							
+							</div>
+						</div>
+					</div>
+				</section>
+				
+	</section>
+
+	</section>
+</body>
+
+<script type="text/javascript">
+ var contractAddress = '0xb12867809f800f6ea2cf4646abb9a28b3f227756';
+  var abi = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			},
+			{
+				"name": "_seller",
+				"type": "address"
+			}
+		],
+		"name": "BuyRequestListPush",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "favoriteProduct",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			},
+			{
+				"name": "score",
+				"type": "uint256"
+			}
+		],
+		"name": "SellerEvaluation",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_applicant",
+				"type": "address"
+			},
+			{
+				"name": "_span",
+				"type": "uint256"
+			}
+		],
+		"name": "SetAllowMyDocument",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_id",
+				"type": "string"
+			},
+			{
+				"name": "_tell",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyer",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			},
+			{
+				"name": "_addr",
+				"type": "address"
+			},
+			{
+				"name": "_price",
+				"type": "uint256"
+			}
+		],
+		"name": "SetRoomconAddr",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			},
+			{
+				"name": "_val",
+				"type": "uint256"
+			}
+		],
+		"name": "SetRoomconValue",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_id",
+				"type": "string"
+			},
+			{
+				"name": "_tell",
+				"type": "uint256"
+			}
+		],
+		"name": "setSeller",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			},
+			{
+				"name": "myaddress",
+				"type": "address"
+			}
+		],
+		"name": "setTransOwner",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			},
+			{
+				"name": "_DocumentName",
+				"type": "string"
+			},
+			{
+				"name": "_DocumentImageHashsrc",
+				"type": "string"
+			},
+			{
+				"name": "_DocumentImageInfo",
+				"type": "string"
+			}
+		],
+		"name": "SetUpdateMyDocument",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "product_index",
+				"type": "uint256"
+			},
+			{
+				"name": "_ImageHashsrc",
+				"type": "string"
+			},
+			{
+				"name": "_ProductAddress",
+				"type": "string"
+			},
+			{
+				"name": "_ProductInfo",
+				"type": "string"
+			},
+			{
+				"name": "_Price",
+				"type": "uint256"
+			},
+			{
+				"name": "_Tag",
+				"type": "string"
+			},
+			{
+				"name": "_ProductName",
+				"type": "string"
+			}
+		],
+		"name": "SetUpdateProduct",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_DocumentName",
+				"type": "string"
+			},
+			{
+				"name": "_DocumentImageHashsrc",
+				"type": "string"
+			},
+			{
+				"name": "_DocumentImageInfo",
+				"type": "string"
+			}
+		],
+		"name": "SetUploadMyDocument",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_ImageHashsrc",
+				"type": "string"
+			},
+			{
+				"name": "_ProductAddress",
+				"type": "string"
+			},
+			{
+				"name": "_ProductInfo",
+				"type": "string"
+			},
+			{
+				"name": "_Price",
+				"type": "uint256"
+			},
+			{
+				"name": "_Tag",
+				"type": "string"
+			},
+			{
+				"name": "_ProductName",
+				"type": "string"
+			}
+		],
+		"name": "SetUploadProduct",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "buyerDetail",
+		"outputs": [
+			{
+				"name": "flag",
+				"type": "bool"
+			},
+			{
+				"name": "id",
+				"type": "string"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "Tell",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "DocumentArray",
+		"outputs": [
+			{
+				"name": "DocumentName",
+				"type": "string"
+			},
+			{
+				"name": "DocumentImageHashsrc",
+				"type": "string"
+			},
+			{
+				"name": "DocumentImageInfo",
+				"type": "string"
+			},
+			{
+				"name": "Documentowner",
+				"type": "address"
+			},
+			{
+				"name": "Documentnumber",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "favoriteProductresult",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_person",
+				"type": "address"
+			},
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getBuyerDocument",
+		"outputs": [
+			{
+				"name": "_allowReference",
+				"type": "bool"
+			},
+			{
+				"name": "_approveBlockNo",
+				"type": "uint256"
+			},
+			{
+				"name": "_refLimitBlockNo",
+				"type": "uint256"
+			},
+			{
+				"name": "_applicant",
+				"type": "address"
+			},
+			{
+				"name": "_DocumentName",
+				"type": "string"
+			},
+			{
+				"name": "_DocumentImageHashsrc",
+				"type": "string"
+			},
+			{
+				"name": "_DocumentImageInfo",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getDocumentList",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "string"
+			}
+		],
+		"name": "getMyAddress",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "GetMyProduct",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetMyProductnumber",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetProdctsSize",
+		"outputs": [
+			{
+				"name": "count",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "getRoomconStateValue",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetRoomcontractSize",
+		"outputs": [
+			{
+				"name": "count",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getSellerScore",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "getType",
+		"outputs": [
+			{
+				"name": "",
+				"type": "int256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "IndexToContract",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "IndexToOwner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
+		"name": "IndexToPrice",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "productArray",
+		"outputs": [
+			{
+				"name": "ProductAddress",
+				"type": "string"
+			},
+			{
+				"name": "ProductInfo",
+				"type": "string"
+			},
+			{
+				"name": "Price",
+				"type": "uint256"
+			},
+			{
+				"name": "Tag",
+				"type": "string"
+			},
+			{
+				"name": "ProductName",
+				"type": "string"
+			},
+			{
+				"name": "ImageHashsrc",
+				"type": "string"
+			},
+			{
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"name": "Productnumber",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "RoomcontractList",
+		"outputs": [
+			{
+				"name": "transaddr",
+				"type": "address"
+			},
+			{
+				"name": "buyer",
+				"type": "address"
+			},
+			{
+				"name": "seller",
+				"type": "address"
+			},
+			{
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"name": "product_index",
+				"type": "uint256"
+			},
+			{
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"name": "statevalue",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "sellerDetail",
+		"outputs": [
+			{
+				"name": "flag",
+				"type": "bool"
+			},
+			{
+				"name": "Tell",
+				"type": "uint256"
+			},
+			{
+				"name": "reliability",
+				"type": "uint256"
+			},
+			{
+				"name": "Status_Numberofpeople",
+				"type": "uint256"
+			},
+			{
+				"name": "Status_sum",
+				"type": "uint256"
+			},
+			{
+				"name": "Status_avg",
+				"type": "uint256"
+			},
+			{
+				"name": "id",
+				"type": "string"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+	var RealEstateTransactionContract;
+	var RealEstateTransactionStorage;
+	var txid;
+
+	var imagehashArray = new Array();
+
+	window.addEventListener('load', function () {
+
+		// Checking if Web3 has been injected by the browser (Mist/MetaMask)
+		if (typeof web3 !== 'undefined') {
+			// Use Mist/MetaMask's provider
+			window.web3 = new Web3(web3.currentProvider);
+		} else {
+			console.log('No web3? You should consider trying MetaMask!')
+			// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+			window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7001"));
+		}
+
+
+		// Now you can start your app & access web3 freely:
+		startApp();
+	});
+
+	function startApp() {
+		RealEstateTransactionContract = web3.eth.contract(abi);
+		RealEstateTransactionStorage = RealEstateTransactionContract.at(contractAddress);
+	}
+
+
+	function getLink(addr) {
+		return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr + '</a>';
+	}
+
+	function OnclickRegisterBuyer() {
+    //블록체인에 업로드
+
+    var BuyerName = document.getElementById("SetBuyerName").value;
+    var BuyerId = document.getElementById("SetBuyerId").value;
+    var BuyerTell =document.getElementById("SetBuyerTell").value;
+
+
+    RealEstateTransactionStorage.setBuyer(BuyerName, BuyerId, BuyerTell, function(e, r) {
+		document.getElementById('OnkRegisterBuyerbtn').innerHTML = "등록중...";
+		txid =r;
+    });
+    var filter = web3.eth.filter('latest');
+    //등록 완료 통지
+    filter.watch(function (e, r) {
+		document.getElementById('OnkRegisterBuyerbtn').innerHTML = "등록";
+      web3.eth.getTransaction(txid, function (e, r) {
+        if (r != null && r.blockNumber > 0) {
+  
+          //(변경완료)
+          
+          filter.stopWatching();
+        }
+      });
+    });
+  }
+
+
+</script>
+
+</html>
