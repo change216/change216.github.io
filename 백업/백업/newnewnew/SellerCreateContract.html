@@ -1,0 +1,486 @@
+<html>
+
+<head>
+  <title>IPFS Image Upload</title>
+
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+  <script src="https://cdn.rawgit.com/ethereumjs/browser-builds/ddb27f8d/dist/ethereumjs-tx/ethereumjs-tx-1.3.3.min.js"></script>
+  <script src="https://unpkg.com/ipfs-api/dist/index.min.js"></script>
+
+  <link rel="stylesheet" href="assets/css/style.min.css">
+  <link rel="stylesheet" href="assets/css/modules.css">
+
+  <style>
+  </style>
+
+</head>
+
+<body>
+ <!-- <section class="MOD_HERO" style="background-image:url(https://unsplash.it/1400/?random)"> -->
+  <section class="MOD_HERO" style="background-image:url(assets/css/3.png)">
+    <div data-layout="_r">
+      <div data-layout="de10">
+        <h1>판매자 계약관리</h1>
+        <h3>계약을 관리합니다.</h3>
+       
+      </div>
+    </div>
+  </section>
+	<section class="MOD_MENU" data-theme="_bgp">
+		<div data-layout="_r" class="nopadding">
+			<nav class="MOD_MENU_Nav">
+				<!-- <p class="MOD_MENU_Title">Menu</p> -->
+								
+				<!-- <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+					<rect width="30" height="6"/>
+					<rect y="24" width="30" height="6"/>
+					<rect y="12" width="30" height="6"/>
+				</svg> -->
+
+				<ul class="AP_Menu_List">
+					<li>
+						<a href="#" class="Homebtn" style="background-image: url(assets/css/Home.png);background-repeat: no-repeat; background-size: contain; 	background-position: center;" onclick="self.location='http://localhost:2001/newnewnew/Main.html';"></a>
+					</li>
+					<li>
+							<a href="#" data-theme="_bgp">마이페이지 </a>
+							<ul>
+									<li>
+										<a href="#" data-theme="_bgpd"  onclick="self.location='http://localhost:2001/newnewnew/FavoriteProducts.html';">찜 목록</a>
+									</li>
+									
+									<li>
+										<a href="#" data-theme="_bgpd" onclick="self.location='http://localhost:2001/newnewnew/MyDocument.html';" >내 서류</a>
+									</li>
+									<li>
+										<a href="#" data-theme="_bgpd"  onclick="self.location='http://localhost:2001/newnewnew/UpdateDocument.html';">내 서류 변경</a>
+									</li>
+									<li>
+										<a href="#" data-theme="_bgpd" >내 서류 열람 허가</a>
+									</li>
+
+							</ul>
+					</li>
+					 
+					<li>
+						<a href="#" data-theme="_bgp" >판매자</a>
+						<ul>
+							<li>
+								<a href="#" onclick="self.location='http://localhost:2001/newnewnew/RegisterSeller.html';" data-theme="_bgpd">판매자 등록</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd"  onclick="self.location='http://localhost:2001/newnewnew/UploadDocument.html';">서류 등록</a>
+							</li>
+
+							<li>
+								<a href="#" onclick="self.location='http://localhost:2001/newnewnew/UploadProduct.html';" data-theme="_bgpd">매물 등록</a>
+							</li>
+							<li>
+								<a href="#" onclick="self.location='http://localhost:2001/newnewnew/UpdateProduct.html';" data-theme="_bgpd">매물 변경</a>
+							</li>
+							<li>
+								<a href="#"  onclick="self.location='http://localhost:2001/newnewnew/MyProducts.html';" data-theme="_bgpd">내 매물</a>
+							</li>
+							<li>
+								<a href="#"  onclick="self.location='http://localhost:2001/newnewnew/SellerCreateContract.html';" data-theme="_bgpd">계약 관리</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="#" data-theme="_bgp">구매자</a>
+						<ul>
+							<li>
+								<a href="#" onclick="self.location='http://localhost:2001/newnewnew/RegisterBuyer.html';" data-theme="_bgpd">구매자 등록</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd"  onclick="self.location='http://localhost:2001/newnewnew/UploadDocument.html';">서류 등록</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd"  onclick="self.location='http://localhost:2001/newnewnew/BuyerCreateContract.html';">계약 관리</a>
+							</li>
+							<li>
+									<a href="#" data-theme="_bgpd"  onclick="self.location='http://localhost:2001/newnewnew/GiveStar.html';">평점 주기</a>
+							</li>
+						
+						</ul>
+					</li>
+
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 4</a>
+					</li>
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 5</a>
+					</li>
+					<li>
+						<a href="#" data-theme="_bgp">메뉴 6</a>
+						<ul>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
+							</li>
+							<li>
+								<a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</section>
+        <!--카테고리분류-->
+        <section class="MOD_SUBNAVIGATION1">
+                <div data-layout="_r">
+                  <div data-layout="al16 al-o2 de-o1 de6 ec4">
+                    <nav class="MOD_SUBNAVIGATION1_Menu" data-theme="_bo2">
+                      <p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs"></p>
+                      <ul>
+                          <li>
+                              <a href="#">ALL</a>
+                          </li>
+                          <li>
+                              <a  href="#">아파트</a>
+                          </li>
+                          <li>
+                              <a  href="#">빌라</a>
+                          </li>
+                          <li>
+                              <a  href="#">주택</a>
+                          </li>
+                          <li>
+                              <a  href="#">미정</a>
+                          </li>
+                          <li>
+                              <a href="#">미정</a>
+                          </li>
+                          <li>
+                              <a href="#">미정</a>
+                          </li>
+                      
+                      </ul>
+                    </nav>
+                  </div> 
+        
+                  <div data-layout="al-o1 de-o2 de10" class="MOD_SUBNAVIGATION1_Page">
+                        <section>
+                            <div data-layout="_r" class="MOD_IMPACTSTRIP3">
+        
+                                <div data-layout="al16 de8" class="MOD_IMPACTSTRIP3_TxtContainer" data-theme="_bgd">
+        
+                                    <div class="MOD_IMPACTSTRIP3_Txt">
+                                        <h2 data-theme="_bo3">판매자 계약 관리</h2>
+        
+                                        <fieldset style="border: 2px solid black; margin-top: 2rem; width: 80rem; position: static;">
+                                            <legend style="color: black;font-weight: bold">내 구매요청 목록</legend>
+                                            <div id="board2" style="margin: 1rem"></div>
+                                            <div id="board"  style="margin: 0.5rem"></div>
+                                        </fieldset>
+
+                                        <fieldset style="border: 2px solid black; margin-top: 2rem; width:80rem; position: static;">
+                                            <legend style="color: black;font-weight: bold">계약 진행 상태</legend>
+                                            <div id="board2" style="margin: 2rem"></div>
+                                            <div id="board3" style="margin: 2rem"></div>
+                                        </fieldset>
+
+                                        <!-- <button id='MyRequest' onMouseover="this.style.color='red';" style="margin: 1rem 0 0 34.3rem; padding: 0.5rem 7.6rem 0.5rem 7.6rem; " onMouseout="this.style.color='black';"
+                                        class="documentbtn" type="button" onclick="LoadRequsetList()">요청목록 불러오기</button> -->
+                                        <!-- <p>매물 인덱스 :
+                                            <input type="text" id="product_index" style="margin-bottom: 8px;"> </p> -->
+                                            <!-- <button onMouseover="this.style.color='red';" style="margin: 1rem 0 0 34.3rem; padding: 0.5rem 10rem 0.5rem 10rem; " onMouseout="this.style.color='black';"
+                                            class="documentbtn" type="button" onclick="createTrans()">계약 생성</button>
+         -->
+
+                                        <!-- <h2 data-theme="_bo3">거래 현황보기</h2> -->
+                                        <!-- <p>계약 트랜잭션 ID: :
+                                            <input type="text" id="trans_txid2" style="margin-bottom: 8px;">
+                                        </p>
+                                        <button onMouseover="this.style.color='red';" style="margin: 1rem 0 0 36.3rem; padding: 0.5rem 9rem 0.5rem 9rem; " onMouseout="this.style.color='black';"
+                                            class="documentbtn" type="button" onclick="TransState()">상태 확인</button> -->
+                                        
+
+                                </div>
+                            </div>
+                        </section>
+            </section>
+        </body>
+
+    <script type="text/javascript">
+   var contractAddress = '0xb12867809f800f6ea2cf4646abb9a28b3f227756';
+	
+    var RealEstateTransactionContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"buyerDetail","outputs":[{"name":"flag","type":"bool"},{"name":"id","type":"string"},{"name":"name","type":"string"},{"name":"Tell","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"}],"name":"favoriteProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"GetMyProduct","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"string"},{"name":"","type":"address"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"productArray","outputs":[{"name":"ProductAddress","type":"string"},{"name":"ProductInfo","type":"string"},{"name":"Price","type":"uint256"},{"name":"Tag","type":"string"},{"name":"ProductName","type":"string"},{"name":"ImageHashsrc","type":"string"},{"name":"owner","type":"address"},{"name":"Productnumber","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"IndexToPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"GetMyProductnumber","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"IndexToContract","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"GetProdctsSize","outputs":[{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getSellerScore","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"score","type":"uint256"}],"name":"SellerEvaluation","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"IndexToOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_id","type":"string"},{"name":"_tell","type":"uint256"}],"name":"setBuyer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_ImageHashsrc","type":"string"},{"name":"_ProductAddress","type":"string"},{"name":"_ProductInfo","type":"string"},{"name":"_Price","type":"uint256"},{"name":"_Tag","type":"string"},{"name":"_ProductName","type":"string"}],"name":"SetUploadProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_applicant","type":"address"},{"name":"_span","type":"uint256"}],"name":"SetAllowMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_addr","type":"address"},{"name":"_price","type":"uint256"}],"name":"SetRoomconAddr","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"product_index","type":"uint256"},{"name":"_ImageHashsrc","type":"string"},{"name":"_ProductAddress","type":"string"},{"name":"_ProductInfo","type":"string"},{"name":"_Price","type":"uint256"},{"name":"_Tag","type":"string"},{"name":"_ProductName","type":"string"}],"name":"SetUpdateProduct","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"myaddress","type":"address"}],"name":"setTransOwner","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_seller","type":"address"}],"name":"BuyRequestListPush","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"favoriteProductresult","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_name","type":"string"},{"name":"_id","type":"string"},{"name":"_tell","type":"uint256"}],"name":"setSeller","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"sellerDetail","outputs":[{"name":"flag","type":"bool"},{"name":"Tell","type":"uint256"},{"name":"reliability","type":"uint256"},{"name":"Status_Numberofpeople","type":"uint256"},{"name":"Status_sum","type":"uint256"},{"name":"Status_avg","type":"uint256"},{"name":"id","type":"string"},{"name":"name","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"string"}],"name":"getMyAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"name":"SetUploadMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DocumentArray","outputs":[{"name":"DocumentName","type":"string"},{"name":"DocumentImageHashsrc","type":"string"},{"name":"DocumentImageInfo","type":"string"},{"name":"Documentowner","type":"address"},{"name":"Documentnumber","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"GetRoomcontractSize","outputs":[{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_val","type":"uint256"}],"name":"SetRoomconValue","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_index","type":"uint256"},{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"name":"SetUpdateMyDocument","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"RoomcontractList","outputs":[{"name":"transaddr","type":"address"},{"name":"buyer","type":"address"},{"name":"seller","type":"address"},{"name":"price","type":"uint256"},{"name":"product_index","type":"uint256"},{"name":"timestamp","type":"uint256"},{"name":"statevalue","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_index","type":"uint256"}],"name":"getRoomconStateValue","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_person","type":"address"},{"name":"_index","type":"uint256"}],"name":"getBuyerDocument","outputs":[{"name":"_allowReference","type":"bool"},{"name":"_approveBlockNo","type":"uint256"},{"name":"_refLimitBlockNo","type":"uint256"},{"name":"_applicant","type":"address"},{"name":"_DocumentName","type":"string"},{"name":"_DocumentImageHashsrc","type":"string"},{"name":"_DocumentImageInfo","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getDocumentList","outputs":[{"name":"","type":"uint256[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"addr","type":"address"}],"name":"getType","outputs":[{"name":"","type":"int256"}],"payable":false,"stateMutability":"view","type":"function"}]);
+    var RealEstateTransactionStorage;
+    var transContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"members","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"sellingPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"con_owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Allclose","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"deadline","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_id","type":"string"}],"name":"pay","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"close","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"isOpened","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"price","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"ProducrIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_new","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_members","type":"address"},{"name":"_index","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"salesVolum","type":"uint256"},{"indexed":false,"name":"sellingPrice","type":"uint256"},{"indexed":false,"name":"deadline","type":"uint256"},{"indexed":false,"name":"beneficiary","type":"address"}],"name":"EscrowStart","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"addr","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"ConfirmedPayment","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"oldaddr","type":"address"},{"indexed":false,"name":"newaddr","type":"address"}],"name":"TransferOwnership","type":"event"}]);
+    var transStorage;
+    var transaddress;
+    var myAccount;
+    var length;
+    var count = 0;
+	var imagecounter = 0;
+    var befotable = "";
+    var ClickProductIndex;
+    window.addEventListener('load', function () {
+
+    // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+    if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider
+    window.web3 = new Web3(web3.currentProvider);
+    } else {
+    console.log('No web3? You should consider trying MetaMask!')
+    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://192.168.0.26:7001"));
+    }
+    
+
+    // Now you can start your app & access web3 freely:
+    startApp();
+    });
+
+   	function startApp() {
+	
+    RealEstateTransactionStorage = RealEstateTransactionContract.at(contractAddress);
+    web3.eth.getAccounts(function(e,r){ 
+        myAccount= r[0]; 
+     })
+     LoadRequsetList();
+    }
+
+    // function LoadRequsetList() {
+    //     RealEstateTransactionStorage.GetRoomcontractSize(function(e,r){ 
+    //         length = r.toNumber(); 
+    //         console.log(length);
+    //         document.getElementById('board').innerHTML = "";
+    //         for(let i =0; i<length;i++){
+
+    //             RealEstateTransactionStorage.RoomcontractList(i,function(e,r){
+    //                 console.log(r[2]);
+    //                 if(r[2]==myAccount){
+    //                     var table = document.createElement('table');
+    //                      var row = table.insertRow();
+    //                      var cell1 = row.insertCell(0);
+    //                      var cell2 = row.insertCell(1);
+    //                      var cell3 = row.insertCell(2);
+
+    //                      cell1.innerHTML = "요청 주소: "+' <span style="color: green; font-weight:bold">'+r[1]+'</span>';
+    //                      cell2.innerHTML = "인덱스: " +' <span style="color: green; font-weight:bold">'+r[4]+'</span>';
+    //                      cell3.innerHTML = "계약 주소: " + ' <span style="color: green; font-weight:bold">'+r[0]+'</span>';
+    //                      table.style.fontWeight = "bold";
+
+    //                     document.getElementById('board').appendChild(table);
+    //                     console.log(r);
+    //                 }
+    //                 });
+    //         }
+    //     });
+    // }
+
+
+    function LoadRequsetList() {
+        RealEstateTransactionStorage.GetRoomcontractSize(function(e,r){ 
+            length = r.toNumber(); 
+            console.log(length);
+            document.getElementById('board').innerHTML = "";
+            for(let i =0; i<length;i++){
+
+                RealEstateTransactionStorage.RoomcontractList(i,function(e,r){
+                    console.log(r[2]);
+                    if(r[2]==myAccount){
+                        PleaseRun(r[4], r[0], r[1]);
+                    }
+                    });
+            }
+        });
+    }
+    
+    function PleaseRun(_index, _addr, _buyer) {
+		var table = document.createElement('table');
+			table.style = "cursor: pointer;";
+			table.style.width = '98%';
+			table.style.margin = '0.5rem';
+			var row = table.insertRow();
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+
+		RealEstateTransactionStorage.productArray(_index, function (e, r) {
+			table.setAttribute('id','table'+count);
+			cell1.setAttribute('id', 'imgeset'+count);
+			cell2.innerHTML = "매물 인덱스: " + _index;
+			cell2.setAttribute('id', 'index' + count);
+			 cell3.innerHTML = "계약 주소: " + _addr;
+			cell3.setAttribute('id', 'address' + count);
+			//  cell3.innerHTML = ", 판매자 id: " + r[6];
+            cell4.setAttribute('id', 'buyeraddress' + count);
+            cell4.innerHTML = "구매자 주소: " + _buyer;
+			table.style.fontWeight = "bold";
+			document.getElementById('board').appendChild(table);
+
+			//함수로 옮기면 안됨 ㅠ 
+			var img = document.createElement('button');
+			img.setAttribute("id", "SubPic"+count);
+			img.setAttribute("class", "pic");
+			table.setAttribute("onclick", "OnClickTable(this.id)");
+			let loadimageurl = "http://ipfs.io/ipfs/" + r[5];
+			img.style = "background-image:url(" + loadimageurl + ")";
+			document.getElementById('imgeset' +count).appendChild(img);
+			
+		count++;
+		});
+    
+    }
+    
+    function OnClickTable(_index) {
+		//클릭시 색변경
+		if(befotable != "")
+		{
+			var befo = document.getElementById(befotable);
+			befo.style.backgroundColor = 'white';
+		}
+		befotable = _index;
+		var table = document.getElementById(_index);
+		table.style.backgroundColor ='gray';
+
+
+		//인풋에 값 전달
+		_index = _index.split('table');
+		 var address = document.getElementById('address' + _index[1]);
+		 address =address.textContent.split(': ');
+		//  var buyeraddress = document.getElementById('buyeraddress' + _index[1]);
+		//  buyeraddress = buyeraddress.textContent.split(': ');
+		var productindex = document.getElementById('index' + _index[1]);
+		productindex = productindex.textContent.split(': ');
+
+		//  document.getElementById('buyeraddress').value = buyeraddress[1];
+        ClickProductIndex = productindex[1];
+
+        transaddress = address[1];
+        //상태확인
+        TransState();
+
+	}
+
+
+    function createTrans() {
+
+  
+        trans = transContract.new(
+        contractAddress,
+        ClickProductIndex,
+        {
+            from: web3.eth.accounts[0], 
+            data: '0x608060405234801561001057600080fd5b506040516040806114418339810180604052810190808051906020019092919080519060200190929190505050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555081600460006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550806006819055508160096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663240e807b826040518263ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040180828152602001915050602060405180830381600087803b15801561025557600080fd5b505af1158015610269573d6000803e3d6000fd5b505050506040513d602081101561027f57600080fd5b810190808051906020019092919050505060078190555060096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166372f897a8826040518263ffffffff167c010000000000000000000000000000000000000000000000000000000002815260040180828152602001915050602060405180830381600087803b15801561038657600080fd5b505af115801561039a573d6000803e3d6000fd5b505050506040513d60208110156103b057600080fd5b8101908080519060200190929190505050600360006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506007546001819055506001600860006101000a81548160ff02191690831515021790555060096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16639b489b51600654306007546040518463ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808481526020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019350505050600060405180830381600087803b15801561055557600080fd5b505af1158015610569573d6000803e3d6000fd5b5050505060096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663e3f3de5660065460016040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200182815260200192505050600060405180830381600087803b15801561066857600080fd5b505af115801561067c573d6000803e3d6000fd5b505050505050610db0806106916000396000f3006080604052600436106100af576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806308ae4b0c146100b457806312821b5e1461013757806321d5f5de1461016257806328dbec31146101b957806329dcb0cf146101d05780632b66d72e146101fb57806343d726d614610257578063692aa97e1461026e578063a035b1fe1461029d578063e65628d6146102c8578063f2fde38b146102f3575b600080fd5b3480156100c057600080fd5b506100f5600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610336565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34801561014357600080fd5b5061014c610369565b6040518082815260200191505060405180910390f35b34801561016e57600080fd5b5061017761036f565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b3480156101c557600080fd5b506101ce610394565b005b3480156101dc57600080fd5b506101e56104e2565b6040518082815260200191505060405180910390f35b610255600480360381019080803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506104e8565b005b34801561026357600080fd5b5061026c6108e0565b005b34801561027a57600080fd5b50610283610be8565b604051808215151515815260200191505060405180910390f35b3480156102a957600080fd5b506102b2610bfb565b6040518082815260200191505060405180910390f35b3480156102d457600080fd5b506102dd610c01565b6040518082815260200191505060405180910390f35b3480156102ff57600080fd5b50610334600480360381019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610c07565b005b60096020528060005260406000206000915054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60015481565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663e3f3de5660065460036040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200182815260200192505050600060405180830381600087803b15801561048f57600080fd5b505af11580156104a3573d6000803e3d6000fd5b50505050600560009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b60025481565b6000600860009054906101000a900460ff16151561050557600080fd5b34905060015481101561051757600080fd5b600360009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1660096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663c4e04aa1846040518263ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018080602001828103825283818151815260200191508051906020019080838360005b8381101561065957808201518184015260208101905061063e565b50505050905090810190601f1680156106865780820380516001836020036101000a031916815260200191505b5092505050602060405180830381600087803b1580156106a557600080fd5b505af11580156106b9573d6000803e3d6000fd5b505050506040513d60208110156106cf57600080fd5b810190808051906020019092919050505073ffffffffffffffffffffffffffffffffffffffff1614151561070257600080fd5b60096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663e3f3de5660065460026040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200182815260200192505050600060405180830381600087803b1580156107fd57600080fd5b505af1158015610811573d6000803e3d6000fd5b5050505033600560006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000600860006101000a81548160ff0219169083151502179055507fc85e69f622563cd1ca95cff8bc4a6b00684777d35069f350365d996d5774b1813382604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019250505060405180910390a15050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614151561093b57600080fd5b60096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663e3f3de5660065460046040518363ffffffff167c01000000000000000000000000000000000000000000000000000000000281526004018083815260200182815260200192505050600060405180830381600087803b158015610a3657600080fd5b505af1158015610a4a573d6000803e3d6000fd5b5050505060096000600460009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663a82569e0600654600560009054906101000a900473ffffffffffffffffffffffffffffffffffffffff166040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808381526020018273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200192505050600060405180830381600087803b158015610b9657600080fd5b505af1158015610baa573d6000803e3d6000fd5b505050506000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16ff5b600860009054906101000a900460ff1681565b60075481565b60065481565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16141515610c6457600080fd5b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050816000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055507f5c486528ec3e3f0ea91181cff8116f02bfa350e03b8b6f12e00765adbb5af85c816000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019250505060405180910390a150505600a165627a7a7230582063cd5285d27be11d64ffa1651b480dc1fe7e8a42cf9321de3deba90df2f97c730029', 
+            gas: '4700000'
+        }, function (e, contract){
+            console.log(e, contract);
+            if (typeof contract.address !== 'undefined') {
+                console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+                // document.getElementById('trans_txid').value = contract.address;
+            }
+        })
+        }
+ 
+    function TransState() {
+
+            
+            RealEstateTransactionStorage.GetRoomcontractSize(function(e,r){ 
+            length = r.toNumber();});
+           
+            for(let i=0;i<length;i++){
+
+                RealEstateTransactionStorage.RoomcontractList(i,function(e,r){
+                
+                if(r[0]==transaddress){
+                        
+                        console.log(r[6].c["0"]);
+                        let val = r[6].c["0"];
+                        switch(val){
+                            case 0: document.getElementById('board3').innerHTML = '<span style="color: red; font-weight:bold">구매요청 (계약 생성 전)</span>'; 
+                            {
+                                CreatecontractBtn(val);
+                            }break;
+                            case 1: document.getElementById('board3').innerHTML = '<span style="color: red; font-weight:bold">입금 대기중..</span>';{
+                                CreatecontractBtn(val);
+                            } break;
+                            case 2: document.getElementById('board3').innerHTML = '<span style="color: blue; font-weight:bold">입금 완료</span>';{
+                                CreatecontractBtn(val);
+                            } break;
+                            case 3: document.getElementById('board3').innerHTML = '<span style="color: yellow; font-weight:bold">거래 취소</span>'; break; 
+                            case 4: document.getElementById('board3').innerHTML = '<span style="color: green; font-weight:bold">거래 완료!!!!★★</span>'; break;
+                        }
+  
+                }
+               
+            });
+
+        }
+    }
+    function CreatecontractBtn(_val) {
+        if(_val == 0){
+            var createcontract = document.createElement('button');
+            createcontract.setAttribute('class', 'documentbtn');
+            createcontract.setAttribute('id', 'createcontract');
+            createcontract.setAttribute('onclick', 'createTrans()');
+            createcontract.setAttribute('onmouseover', "this.style.color='red';");
+            createcontract.setAttribute('onMouseout', "this.style.color='black';");
+            createcontract.setAttribute('style', "margin: 0 0 0 37.3rem; padding: 0.5rem 10rem 0.5rem 10rem; ");
+            createcontract.type = 'button';
+            document.getElementById('board3').appendChild(createcontract);
+            document.getElementById('createcontract').innerHTML = '계약 생성';
+        }
+        else if (_val == 2 || _val ==1) {
+
+            var Okbtn = document.createElement('button');
+            Okbtn.setAttribute('class', 'oknobtn');
+            Okbtn.setAttribute('id', 'Yes');
+            Okbtn.setAttribute('onclick', 'transClose()');
+            Okbtn.setAttribute('onmouseover', "this.style.color='red';");
+            Okbtn.setAttribute('onMouseout', "this.style.color='black';");
+       
+            Okbtn.type = 'button';
+            document.getElementById('board3').appendChild(Okbtn);
+            document.getElementById('Yes').innerHTML = '거래 완료';
+
+            var Nobtn = document.createElement('button');
+            Nobtn.setAttribute('class', 'oknobtn');
+            Nobtn.setAttribute('id', 'No');
+            Nobtn.setAttribute('onclick', 'transAllClose()');
+            Nobtn.setAttribute('onmouseover', "this.style.color='red';");
+            Nobtn.setAttribute('onMouseout', "this.style.color='black';");
+     
+            Nobtn.type = 'button';
+            document.getElementById('board3').appendChild(Nobtn);
+            document.getElementById('No').innerHTML = '거래 취소';
+    
+
+        }
+    }
+    
+
+    function transClose() {
+        transStorage = transContract.at(transaddress);
+        transStorage.ProducrIndex(function(e,r){
+        RealEstateTransactionStorage.SetUpdateProduct(r.c["0"],"QmVPk6tQDvCvc9SbrBxnyjQGSpqTM1UhiokvWHiG2RJvxH##","","Sold Out","","","판매완료",function(e,r){
+            if(!e)
+                {console.log("변경 트랜잭션"+r);}
+                transStorage.close(function(e,r){
+                    if(!e) {alert("거래가 완료!! 되었습니다!"); }
+                    
+                });
+        })
+        })
+    }
+
+    function transAllClose() {
+    
+        transStorage = transContract.at(transaddress);
+        transStorage.Allclose(function(e,r){
+            if(!e) {alert("거래가 취소 되었습니다!"); }
+           
+        })
+    }
+
+    </script>
+</html>
